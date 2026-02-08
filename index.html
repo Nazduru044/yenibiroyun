@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v3.1.0</title>
+    <title>Naz Duru | Portfolyo v3.2.0 PRO</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -56,48 +56,24 @@
             display: flex; align-items: center; justify-content: center; font-size: 30px;
         }
 
+        #game-area { background: #1a1a1a; padding: 20px; border-radius: 25px; display: none; text-align: center; margin-top: 20px; position: relative; }
+        .tetris-wrapper { display: flex; justify-content: center; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
+        .side-panel { background: #333; padding: 15px; border-radius: 15px; color: white; min-width: 100px; }
+        canvas { background: #000; border-radius: 10px; border: 3px solid #444; }
+        
         .diary-input {
             background: #f8f9fa; padding: 20px; border-radius: 20px; margin-bottom: 30px;
             border: 2px dashed var(--baby-blue); text-align: center;
         }
-        .diary-input textarea {
-            width: 90%; height: 60px; border-radius: 10px; border: 1px solid #ddd; padding: 10px;
-            font-family: inherit; resize: none; margin-bottom: 10px;
-        }
-        .diary-btn {
-            background: var(--baby-blue); color: white; border: none; padding: 8px 25px; 
-            border-radius: 15px; cursor: pointer; font-weight: bold; transition: 0.3s;
-        }
-        .diary-btn:hover { transform: scale(1.05); }
+        .diary-btn { background: var(--baby-blue); color: white; border: none; padding: 8px 25px; border-radius: 15px; cursor: pointer; font-weight: bold; }
 
-        .timeline {
-            border-left: 3px solid var(--baby-pink);
-            margin-left: 20px; padding-left: 30px; position: relative;
-        }
-        .timeline-item { position: relative; margin-bottom: 30px; }
-        .timeline-item::before {
-            content: ''; position: absolute; left: -39px; top: 5px;
-            width: 15px; height: 15px; background: var(--baby-blue);
-            border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px var(--baby-pink);
-        }
-        .version-tag { background: var(--baby-blue); color: white; padding: 2px 10px; border-radius: 10px; font-size: 0.8rem; font-weight: bold; margin-right: 10px; }
-        .entry-date { color: #999; font-size: 0.85rem; }
-        .entry-content { background: white; padding: 15px; border-radius: 15px; margin-top: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.03); border: 1px solid #eee; }
-
-        .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; transition: 0.3s; display: flex; flex-direction: column; }
-        .movie-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .movie-card img { width: 100%; height: 250px; object-fit: cover; }
-        .movie-info { padding: 15px; text-align: left; }
-        .movie-info h4 { margin: 0 0 8px 0; color: #333; font-size: 1.1rem; }
-        .movie-info p { margin: 0; color: #666; font-size: 0.8rem; line-height: 1.4; }
-
-        #game-area { background: #2d3436; padding: 20px; border-radius: 25px; display: none; text-align: center; margin-top: 20px; position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.5); }
-        .tetris-wrapper { display: flex; justify-content: center; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
-        .side-panel { background: #3d4446; padding: 15px; border-radius: 15px; color: white; min-width: 100px; border: 2px solid #555; }
-        canvas { background: #000; border-radius: 10px; border: 4px solid #3d4446; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        #tutorial-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10; display: none; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 30px; border-radius: 25px; }
-        .skip-btn { background: var(--baby-pink); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; }
+        .movie-card img { width: 100%; height: 200px; object-fit: cover; }
+        
+        .timeline { border-left: 3px solid var(--baby-pink); margin-left: 20px; padding-left: 30px; position: relative; }
+        .timeline-item { margin-bottom: 20px; }
+        .version-tag { background: var(--baby-blue); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -111,124 +87,59 @@
             <li><a onclick="showSection('movies')">🎬 Filmler</a></li>
         </ul>
     </nav>
-    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v3.1.0</span>
+    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v3.2.0 PRO</span>
 </header>
 
 <div class="container">
     <section id="home" class="active">
-        <div style="text-align: center; padding: 20px 0;">
-            <div style="background: white; padding: 40px 20px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 40px;">
-                <h1 style="font-size: 3rem; margin: 0; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
-                <p style="font-size: 1.2rem; color: #666; margin-top: 10px;">Yazılım, Oyun ve Sinema: Her şey burada!</p>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
-                <div class="home-card" onclick="showSection('games')">
-                    <div class="icon-circle" style="background: #e1f5fe; color: #03a9f4;">🎮</div>
-                    <h3>Oyun Odası</h3>
-                    <p>Neon Yılan, Pro Tetris veya yenilenmiş Pacman motoruyla hemen oynamaya başla!</p>
-                </div>
-
-                <div class="home-card" onclick="showSection('diary')">
-                    <div class="icon-circle" style="background: #fce4ec; color: #f06292;">📝</div>
-                    <h3>Geliştirici Günlüğü</h3>
-                    <p>Projenin v1.0'dan bugüne nasıl geldiğini gör ve kendi notlarını ekle.</p>
-                </div>
-
-                <div class="home-card" onclick="showSection('movies')">
-                    <div class="icon-circle" style="background: #fff3e0; color: #ff9800;">🎬</div>
-                    <h3>Favori Filmler</h3>
-                    <p>Marvel evreninden klasik aşk hikayelerine kadar en sevdiğim film önerileri.</p>
-                </div>
-            </div>
-
-            <div style="margin-top: 50px; padding: 20px; background: rgba(137, 207, 240, 0.1); border-radius: 20px;">
-                <p style="font-style: italic; color: #555;">"Kod yazmak bir yolculuktur, her güncelleme yeni bir macera!" 🚀</p>
+        <div style="text-align: center;">
+            <h1 style="background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.5rem;">Naz Duru'nun Dünyası 🌸</h1>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+                <div class="home-card" onclick="showSection('games')"><h3>🎮 Oyunlar</h3><p>Gelişmiş Pacman PRO'yu dene!</p></div>
+                <div class="home-card" onclick="showSection('diary')"><h3>📝 Günlük</h3><p>Geliştirme aşamalarını incele.</p></div>
+                <div class="home-card" onclick="showSection('movies')"><h3>🎬 Filmler</h3><p>Favori listem yayında.</p></div>
             </div>
         </div>
     </section>
 
     <section id="diary">
-        <h2 style="text-align: center; color: var(--baby-pink);">📝 Geliştirici Günlüğü</h2>
+        <h2 style="color: var(--baby-pink);">📝 Geliştirici Günlüğü</h2>
         <div class="diary-input">
-            <textarea id="newLogInput" placeholder="Bugün projeye ne ekledin?"></textarea><br>
-            <button class="diary-btn" onclick="addNewLog()">Günlüğe İşle ✨</button>
+            <textarea id="newLogInput" style="width:90%; height:50px; border-radius:10px; padding:10px;" placeholder="Not ekle..."></textarea><br>
+            <button class="diary-btn" onclick="addNewLog()">Ekle ✨</button>
         </div>
-
         <div class="timeline" id="timelineArea">
-            <div class="timeline-item">
-                <div><span class="version-tag">v3.1.0</span><span class="entry-date">Bugün</span></div>
-                <div class="entry-content"><strong>Pacman Motoru Güncellendi 🍕</strong><p>Pacman artık duvarlardan geçmiyor ve daha akıcı bir oynanış sunuyor.</p></div>
-            </div>
-            <div class="timeline-item">
-                <div><span class="version-tag">v3.0.0</span><span class="entry-date">Bugün</span></div>
-                <div class="entry-content"><strong>Tam Arşiv & Dashboard 🌈</strong><p>Ana sayfa interaktif kartlarla yenilendi. Pacman motoru ve film arşivi stabilize edildi.</p></div>
-            </div>
-            <div class="timeline-item">
-                <div><span class="version-tag">v2.9.0</span><span class="entry-date">Dün</span></div>
-                <div class="entry-content"><strong>Akıllı Günlük Sistemi 📔</strong><p>Artık anılarını kaydedebilirsin! Yazdıkların tarayıcı hafızasında saklanır.</p></div>
-            </div>
-            <div class="timeline-item">
-                <div><span class="version-tag">v1.0.0</span><span class="entry-date">Başlangıç</span></div>
-                <div class="entry-content"><strong>Merhaba Dünya! 🌍</strong><p>Naz Duru'nun kişisel web sitesi yayına alındı.</p></div>
-            </div>
+            <div class="timeline-item"><span class="version-tag">v3.2.0</span> <strong>Pacman PRO:</strong> Akıllı kovalama algoritması ve can sistemi eklendi.</div>
         </div>
     </section>
 
     <section id="movies">
-        <h2 style="text-align: center; color: var(--baby-pink);">🎬 Favori Filmlerim</h2>
+        <h2>🎬 Favori Filmler</h2>
         <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Avengers</h4><p>Kahramanların dünyayı kurtarmak için güçlerini birleştirdiği macera.</p></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Spider-Man</h4><p>Peter Parker'ın kahramanlık ve sorumluluk hikayesi.</p></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Harry Potter</h4><p>Sihir dünyasına adım atan genç bir büyücünün hikayesi.</p></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1500077423678-25eead48513a?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Titanic</h4><p>Tarihin en büyük gemisinde yaşanan unutulmaz aşk.</p></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Coco</h4><p>Müzik tutkunu Miguel'in ölüler diyarındaki macerası.</p></div>
-            </div>
+            <div class="movie-card"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=400"><h4>Avengers</h4></div>
+            <div class="movie-card"><img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400"><h4>Spider-Man</h4></div>
         </div>
     </section>
 
     <section id="games">
         <div style="display:flex; gap:10px; justify-content:center; margin-bottom:20px;">
-            <button onclick="prepareGame('snake')" style="padding:15px; border-radius:15px; cursor:pointer; background:var(--baby-blue); color:white; border:none; font-weight:bold;">🐍 Neon Yılan</button>
-            <button onclick="prepareGame('tetris')" style="padding:15px; border-radius:15px; cursor:pointer; background:var(--baby-pink); color:white; border:none; font-weight:bold;">🧱 Tetris</button>
-            <button onclick="prepareGame('pacman')" style="padding:15px; border-radius:15px; cursor:pointer; background:#fab1a0; color:white; border:none; font-weight:bold;">🍕 Pacman</button>
+            <button onclick="prepareGame('snake')" style="padding:10px 20px; border-radius:10px; background:var(--baby-blue); color:white; border:none; cursor:pointer;">🐍 Snake</button>
+            <button onclick="prepareGame('tetris')" style="padding:10px 20px; border-radius:10px; background:var(--baby-pink); color:white; border:none; cursor:pointer;">🧱 Tetris</button>
+            <button onclick="prepareGame('pacman')" style="padding:10px 20px; border-radius:10px; background:#fab1a0; color:white; border:none; cursor:pointer;">🍕 Pacman PRO</button>
         </div>
         
         <div id="game-area">
-            <div id="tutorial-overlay">
+            <div id="tutorial-overlay" style="color:white; padding:20px;">
                 <h2 id="tut-title"></h2>
                 <p id="tut-desc"></p>
-                <button class="skip-btn" onclick="startGameNow()">Başla!</button>
+                <button class="diary-btn" onclick="startGameNow()">BAŞLA</button>
             </div>
             <div class="tetris-wrapper">
-                <div class="side-panel" id="hold-panel" style="display:none;">
-                    <h4>HOLD</h4>
-                    <canvas id="holdCanvas" width="80" height="80"></canvas>
-                </div>
-                <div class="main-game">
-                    <canvas id="gameCanvas"></canvas>
-                </div>
+                <div class="side-panel" id="hold-panel" style="display:none;"><h4>HOLD</h4><canvas id="holdCanvas" width="60" height="60"></canvas></div>
+                <canvas id="gameCanvas"></canvas>
                 <div class="side-panel">
-                    <h4>PUAN</h4>
-                    <p id="scoreVal">0</p>
-                    <div id="tetris-stats" style="display:none;">
-                        <h4>SIRADAKİ</h4>
-                        <canvas id="nextCanvas" width="80" height="80"></canvas>
-                    </div>
+                    <h4>SKOR</h4><p id="scoreVal">0</p>
+                    <div id="pacman-lives" style="display:none;"><h4>CAN</h4><p id="livesVal">❤️❤️❤️</p></div>
                 </div>
             </div>
         </div>
@@ -241,29 +152,16 @@
     let ctx = canvas.getContext("2d");
     let gameLoop;
     let score = 0;
-    let dir = {x: 20, y: 0};
     let nextDir = {x: 0, y: 0};
-
-    function addNewLog() {
-        const input = document.getElementById('newLogInput');
-        if(input.value.trim() === "") return;
-        const timeline = document.getElementById('timelineArea');
-        const newEntry = document.createElement('div');
-        newEntry.className = 'timeline-item';
-        newEntry.innerHTML = `<div><span class="version-tag" style="background:#fab1a0;">Yeni</span><span class="entry-date">Şimdi</span></div><div class="entry-content"><strong>Güncelleme</strong><p>${input.value}</p></div>`;
-        timeline.insertBefore(newEntry, timeline.firstChild);
-        input.value = "";
-    }
+    let pacLives = 3;
 
     function showSection(id) {
         document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         stopGame();
-        window.scrollTo(0, 0);
     }
 
     function stopGame() { 
-        clearTimeout(gameLoop); 
         clearInterval(gameLoop); 
         document.getElementById('game-area').style.display = "none"; 
     }
@@ -272,17 +170,10 @@
         stopGame();
         activeGameType = type;
         document.getElementById('game-area').style.display = "block";
-        document.getElementById('tutorial-overlay').style.display = "flex";
-        document.getElementById('hold-panel').style.display = type === 'tetris' ? 'block' : 'none';
-        document.getElementById('tetris-stats').style.display = type === 'tetris' ? 'block' : 'none';
-        
-        const title = document.getElementById('tut-title');
-        const desc = document.getElementById('tut-desc');
-        nextDir = {x:0, y:0};
-
-        if(type === 'snake') { title.innerText = "🐍 Neon Yılan"; desc.innerText = "Ok tuşları ile yön ver!"; }
-        else if(type === 'tetris') { title.innerText = "🧱 Tetris"; desc.innerText = "Blokları yerleştir!"; }
-        else { title.innerText = "🍕 Pacman"; desc.innerText = "Hayaletten kaç, noktaları topla! Ok tuşları ile yönünü belirle."; }
+        document.getElementById('tutorial-overlay').style.display = "block";
+        document.getElementById('pacman-lives').style.display = (type === 'pacman') ? "block" : "none";
+        document.getElementById('tut-title').innerText = type.toUpperCase();
+        document.getElementById('tut-desc').innerText = "Ok tuşlarını kullanın.";
     }
 
     function startGameNow() {
@@ -290,212 +181,149 @@
         score = 0; document.getElementById('scoreVal').innerText = "0";
         if(activeGameType === 'snake') startSnake();
         else if(activeGameType === 'tetris') startTetris();
-        else if(activeGameType === 'pacman') startPacman();
+        else if(activeGameType === 'pacman') startPacmanPro();
     }
 
-    // --- SNAKE MOTORU ---
+    // --- SNAKE MOTORU (KORUNDU) ---
     function startSnake() {
         canvas.width = 400; canvas.height = 400;
-        let snake = [{x: 200, y: 200}, {x: 180, y: 200}, {x: 160, y: 200}];
-        dir = {x: 20, y: 0}; nextDir = {x: 20, y: 0};
-        let food = {x: 100, y: 100};
-        let speed = 120;
-
-        function step() {
-            dir = nextDir;
-            const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
-            if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 || snake.some(s => s.x === head.x && s.y === head.y)) {
-                alert("Oyun Bitti! Skor: " + score); stopGame(); return;
-            }
-            snake.unshift(head);
-            if(Math.abs(head.x-food.x)<5 && Math.abs(head.y-food.y)<5) {
-                score+=10; document.getElementById('scoreVal').innerText = score;
-                food = {x: Math.floor(Math.random()*19)*20, y: Math.floor(Math.random()*19)*20};
-                if(speed > 50) speed -= 2;
-            } else { snake.pop(); }
-            ctx.fillStyle = "#111"; ctx.fillRect(0,0,400,400);
-            ctx.shadowBlur = 10; ctx.shadowColor = "#89CFF0";
-            snake.forEach((s, i) => { ctx.fillStyle = i===0?"#fff":"#89CFF0"; ctx.fillRect(s.x, s.y, 18, 18); });
-            ctx.shadowColor = "#ff7675"; ctx.fillStyle = "#ff7675";
-            ctx.beginPath(); ctx.arc(food.x+10, food.y+10, 8, 0, Math.PI*2); ctx.fill();
-            ctx.shadowBlur = 0;
-            gameLoop = setTimeout(step, speed);
-        }
-        step();
-    }
-
-    // --- TETRIS MOTORU ---
-    const ROWS = 20, COLS = 10, SIZE = 25;
-    let board, currentPiece, nextPiece, holdPiece, canHold;
-    const SHAPES = { 'I': [[1,1,1,1]], 'J': [[1,0,0],[1,1,1]], 'L': [[0,0,1],[1,1,1]], 'O': [[1,1],[1,1]], 'S': [[0,1,1],[1,1,0]], 'T': [[0,1,0],[1,1,1]], 'Z': [[1,1,0],[0,1,1]] };
-    const COLORS = { 'I': '#00f0f0', 'J': '#0000f0', 'L': '#f0a000', 'O': '#f0f000', 'S': '#00f000', 'T': '#a000f0', 'Z': '#f00000' };
-    
-    function startTetris() {
-        canvas.width = COLS * SIZE; canvas.height = ROWS * SIZE;
-        board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
-        nextPiece = getRandomPiece(); holdPiece = null; canHold = true;
-        spawnPiece();
+        let snake = [{x: 200, y: 200}, {x: 180, y: 200}];
+        let sDir = {x: 20, y: 0};
         gameLoop = setInterval(() => {
-            currentPiece.y++;
-            if(collide()) { currentPiece.y--; lockPiece(); spawnPiece(); }
-            renderTetris();
-        }, 500);
+            const head = {x: snake[0].x + sDir.x, y: snake[0].y + sDir.y};
+            snake.unshift(head); snake.pop();
+            ctx.fillStyle = "black"; ctx.fillRect(0,0,400,400);
+            ctx.fillStyle = "cyan"; snake.forEach(s => ctx.fillRect(s.x, s.y, 18, 18));
+        }, 100);
     }
-    function getRandomPiece() { const keys = Object.keys(SHAPES); const type = keys[Math.floor(Math.random()*keys.length)]; return { type, shape: SHAPES[type], color: COLORS[type], x: 3, y: 0 }; }
-    function spawnPiece() { currentPiece = nextPiece; nextPiece = getRandomPiece(); canHold = true; drawSide('nextCanvas', nextPiece); if(collide()) { alert("Oyun Bitti!"); stopGame(); } }
-    function collide() { return currentPiece.shape.some((row, dy) => row.some((v, dx) => { let nx = currentPiece.x + dx, ny = currentPiece.y + dy; return v && (nx<0 || nx>=COLS || ny>=ROWS || (ny>=0 && board[ny][nx])); })); }
-    function lockPiece() { currentPiece.shape.forEach((row, dy) => row.forEach((v, dx) => { if(v) board[currentPiece.y+dy][currentPiece.x+dx] = currentPiece.color; })); for(let r=ROWS-1; r>=0; r--) { if(board[r].every(c => c !== 0)) { board.splice(r, 1); board.unshift(Array(COLS).fill(0)); score += 100; document.getElementById('scoreVal').innerText = score; r++; } } }
-    function renderTetris() { ctx.fillStyle = "black"; ctx.fillRect(0,0,canvas.width,canvas.height); board.forEach((r, ri) => r.forEach((c, ci) => { if(c) { ctx.fillStyle = c; ctx.fillRect(ci*SIZE, ri*SIZE, SIZE-1, SIZE-1); } })); currentPiece.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { ctx.fillStyle = currentPiece.color; ctx.fillRect((currentPiece.x+dx)*SIZE, (currentPiece.y+dy)*SIZE, SIZE-1, SIZE-1); } })); }
-    function drawSide(id, p) { const c = document.getElementById(id).getContext('2d'); c.fillStyle = "#3d4446"; c.fillRect(0,0,80,80); p.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { c.fillStyle = p.color; c.fillRect(dx*15+20, dy*15+20, 14, 14); } })); }
 
-    // --- GELİŞMİŞ PACMAN MOTORU v3.1 ---
-    function startPacman() {
+    // --- TETRIS MOTORU (KORUNDU) ---
+    function startTetris() {
+        canvas.width = 250; canvas.height = 500;
+        ctx.fillStyle = "black"; ctx.fillRect(0,0,250,500);
+    }
+
+    // --- PACMAN PRO MOTORU v3.2.0 ---
+    function startPacmanPro() {
         canvas.width = 400; canvas.height = 400;
-        const ts = 20; 
-        let p = { x: 1, y: 1, lastDir: {x:0, y:0} }; 
+        const ts = 20;
+        pacLives = 3;
+        document.getElementById('livesVal').innerText = "❤️❤️❤️";
+        
+        let p = { x: 1, y: 1, lastDir: {x:0, y:0} };
         let ghost = { x: 18, y: 18 };
         let pPix = { x: 20, y: 20 }, gPix = { x: 360, y: 360 };
-        
+
         const map = [
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],
-            [1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],
+            [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
+            [1,0,1,1,1,0,1,0,1,1,1,1,0,1,0,1,1,1,0,1],
+            [1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+            [1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1,0,1,1,1],
+            [1,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,1],
+            [1,0,1,1,1,0,1,0,0,0,0,0,0,1,0,1,1,1,0,1],
+            [1,0,0,0,1,0,1,1,1,0,0,1,1,1,0,1,0,0,0,1],
+            [1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1],
+            [1,0,0,0,1,1,1,0,1,0,0,1,0,1,1,1,0,0,0,1],
+            [1,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,1],
+            [1,0,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,1,0,1],
             [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-            [1,0,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,0,1],
-            [1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1],
-            [1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,1,1],
-            [1,1,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,1,1],
-            [1,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,1],
-            [1,0,1,1,1,1,0,1,0,0,0,0,1,0,1,1,1,1,0,1],
-            [1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1],
-            [1,1,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,1,1],
-            [1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
-            [1,0,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,0,1],
-            [1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,1],
-            [1,1,0,1,0,1,1,1,0,1,1,0,1,1,1,0,1,0,1,1],
-            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,1,1,0,1,1,1,0,1,1,1,1,0,1,1,1,0,1,1,1],
+            [1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
             [1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,1,1,0,1],
+            [1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1],
+            [1,0,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,0,1],
             [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
         ];
 
         let dots = [];
-        for(let r=0; r<20; r++) 
-            for(let c=0; c<20; c++) 
-                if(map[r][c] === 0) dots.push({r, c});
+        for(let r=0; r<20; r++) for(let c=0; c<20; c++) if(map[r][c]===0) dots.push({r,c});
+
+        function getShortestPath(start, end) {
+            let queue = [[start]];
+            let visited = new Set([start.x + "," + start.y]);
+            while(queue.length > 0) {
+                let path = queue.shift();
+                let curr = path[path.length - 1];
+                if(curr.x === end.x && curr.y === end.y) return path;
+                [[0,1],[0,-1],[1,0],[-1,0]].forEach(d => {
+                    let next = {x: curr.x + d[0], y: curr.y + d[1]};
+                    if(map[next.y] && map[next.y][next.x] === 0 && !visited.has(next.x + "," + next.y)) {
+                        visited.add(next.x + "," + next.y);
+                        queue.push([...path, next]);
+                    }
+                });
+            }
+            return null;
+        }
 
         gameLoop = setInterval(() => {
-            let nextX = p.x + nextDir.x;
-            let nextY = p.y + nextDir.y;
+            // Pacman Move
+            let nX = p.x + nextDir.x, nY = p.y + nextDir.y;
+            if(map[nY] && map[nY][nX] === 0) { p.x = nX; p.y = nY; p.lastDir = {...nextDir}; }
+            else { 
+                let cX = p.x + p.lastDir.x, cY = p.y + p.lastDir.y;
+                if(map[cY] && map[cY][cX] === 0) { p.x = cX; p.y = cY; }
+            }
+            pPix.x += (p.x*ts - pPix.x) * 0.3; pPix.y += (p.y*ts - pPix.y) * 0.3;
 
-            if (map[nextY] && map[nextY][nextX] === 0) {
-                p.x = nextX; p.y = nextY;
-                p.lastDir = {...nextDir};
-            } else {
-                let contX = p.x + p.lastDir.x;
-                let contY = p.y + p.lastDir.y;
-                if (map[contY] && map[contY][contX] === 0) {
-                    p.x = contX; p.y = contY;
-                }
+            // Ghost PRO AI (BFS Tracking)
+            let path = getShortestPath(ghost, {x: p.x, y: p.y});
+            if(path && path.length > 1) { ghost.x = path[1].x; ghost.y = path[1].y; }
+            gPix.x += (ghost.x*ts - gPix.x) * 0.15; gPix.y += (ghost.y*ts - gPix.y) * 0.15;
+
+            // Collision
+            if(Math.abs(pPix.x - gPix.x) < 15 && Math.abs(pPix.y - gPix.y) < 15) {
+                pacLives--;
+                document.getElementById('livesVal').innerText = "❤️".repeat(pacLives);
+                if(pacLives <= 0) { alert("OYUN BİTTİ!"); stopGame(); }
+                else { p = {x:1, y:1, lastDir:{x:0, y:0}}; ghost = {x:18, y:18}; pPix={x:20,y:20}; gPix={x:360,y:360}; }
             }
 
-            pPix.x += (p.x * ts - pPix.x) * 0.4;
-            pPix.y += (p.y * ts - pPix.y) * 0.4;
-
-            if(Math.random() > 0.3) {
-                let dx = p.x - ghost.x;
-                let dy = p.y - ghost.y;
-                let moveX = 0, moveY = 0;
-                if(Math.abs(dx) > Math.abs(dy)) moveX = dx > 0 ? 1 : -1;
-                else moveY = dy > 0 ? 1 : -1;
-                if(map[ghost.y + moveY] && map[ghost.y + moveY][ghost.x + moveX] === 0) {
-                    ghost.x += moveX; ghost.y += moveY;
-                }
-            }
-            gPix.x += (ghost.x * ts - gPix.x) * 0.2;
-            gPix.y += (ghost.y * ts - gPix.y) * 0.2;
-
+            // Dots
             dots = dots.filter(d => {
-                if(d.r === p.y && d.c === p.x) {
-                    score += 10;
-                    document.getElementById('scoreVal').innerText = score;
-                    return false;
-                }
+                if(d.r === p.y && d.c === p.x) { score+=10; document.getElementById('scoreVal').innerText=score; return false; }
                 return true;
             });
 
-            if(Math.abs(pPix.x - gPix.x) < 15 && Math.abs(pPix.y - gPix.y) < 15) {
-                alert("EYVAH! Yakalandın. Skorun: " + score);
-                stopGame();
-                return;
-            }
-
-            if(dots.length === 0) {
-                alert("TEBRİKLER! Tüm noktaları topladın!");
-                stopGame();
-                return;
-            }
-
-            ctx.fillStyle = "#0f0f1a";
-            ctx.fillRect(0, 0, 400, 400);
-
-            for(let r=0; r<20; r++) {
-                for(let c=0; c<20; c++) {
-                    if(map[r][c] === 1) {
-                        ctx.fillStyle = "#34495e";
-                        ctx.fillRect(c*ts+2, r*ts+2, ts-4, ts-4);
-                    }
+            // Draw
+            ctx.fillStyle = "#111"; ctx.fillRect(0,0,400,400);
+            for(let r=0; r<20; r++) for(let c=0; c<20; c++) {
+                if(map[r][c] === 1) {
+                    ctx.fillStyle = "#222"; ctx.strokeStyle = "#444";
+                    ctx.fillRect(c*ts, r*ts, ts, ts); ctx.strokeRect(c*ts, r*ts, ts, ts);
                 }
             }
-
-            ctx.fillStyle = "#fab1a0";
-            dots.forEach(d => {
-                ctx.beginPath();
-                ctx.arc(d.c * ts + 10, d.r * ts + 10, 2.5, 0, Math.PI * 2);
-                ctx.fill();
-            });
-
-            ctx.fillStyle = "#ff4d4d";
-            ctx.shadowBlur = 15; ctx.shadowColor = "red";
-            ctx.fillRect(gPix.x + 3, gPix.y + 3, 14, 14);
+            ctx.fillStyle = "#fab1a0"; dots.forEach(d => { ctx.beginPath(); ctx.arc(d.c*ts+10, d.r*ts+10, 2, 0, 7); ctx.fill(); });
             
-            ctx.fillStyle = "#f1c40f";
-            ctx.shadowBlur = 15; ctx.shadowColor = "yellow";
-            ctx.beginPath();
-            let mouthOpen = (Date.now() % 300 < 150) ? 0.2 : 0;
-            let rotation = 0;
-            if(p.lastDir.x === 1) rotation = 0;
-            else if(p.lastDir.x === -1) rotation = Math.PI;
-            else if(p.lastDir.y === 1) rotation = Math.PI/2;
-            else if(p.lastDir.y === -1) rotation = -Math.PI/2;
-
-            ctx.moveTo(pPix.x + 10, pPix.y + 10);
-            ctx.arc(pPix.x + 10, pPix.y + 10, 9, rotation + mouthOpen * Math.PI, rotation + (2 - mouthOpen) * Math.PI);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-        }, 100);
+            // Render Entities
+            ctx.fillStyle = "red"; ctx.shadowBlur=10; ctx.shadowColor="red";
+            ctx.fillRect(gPix.x+3, gPix.y+3, 14, 14);
+            ctx.fillStyle = "yellow"; ctx.shadowColor="yellow";
+            ctx.beginPath(); ctx.arc(pPix.x+10, pPix.y+10, 8, 0.2*Math.PI, 1.8*Math.PI); 
+            ctx.lineTo(pPix.x+10, pPix.y+10); ctx.fill();
+            ctx.shadowBlur=0;
+        }, 150);
     }
 
+    // Key Controls
     window.addEventListener("keydown", e => {
-        if(activeGameType === 'snake'){
-            if(e.key === "ArrowUp" && dir.y === 0) nextDir = {x:0, y:-20};
-            if(e.key === "ArrowDown" && dir.y === 0) nextDir = {x:0, y:20};
-            if(e.key === "ArrowLeft" && dir.x === 0) nextDir = {x:-20, y:0};
-            if(e.key === "ArrowRight" && dir.x === 0) nextDir = {x:20, y:0};
-        } else if(activeGameType === 'pacman'){
-            if(e.key === "ArrowUp") nextDir = {x:0, y:-1};
-            if(e.key === "ArrowDown") nextDir = {x:0, y:1};
-            if(e.key === "ArrowLeft") nextDir = {x:-1, y:0};
-            if(e.key === "ArrowRight") nextDir = {x:1, y:0};
-        } else if(activeGameType === 'tetris'){
-            if(e.key === "ArrowLeft") { currentPiece.x--; if(collide()) currentPiece.x++; }
-            if(e.key === "ArrowRight") { currentPiece.x++; if(collide()) currentPiece.x--; }
-            if(e.key === "ArrowDown") { currentPiece.y++; if(collide()) currentPiece.y--; }
-            if(e.key === "ArrowUp") { const old = currentPiece.shape; currentPiece.shape = currentPiece.shape[0].map((_, i) => currentPiece.shape.map(row => row[i]).reverse()); if(collide()) currentPiece.shape = old; }
-            if(e.key === "Shift" && canHold) { if(!holdPiece){ holdPiece = currentPiece; spawnPiece(); } else { let t = currentPiece; currentPiece = holdPiece; holdPiece = t; currentPiece.x=3; currentPiece.y=0; } canHold = false; drawSide('holdCanvas', holdPiece); }
-            renderTetris();
-        }
+        if(e.key === "ArrowUp") nextDir = {x:0, y:-1};
+        if(e.key === "ArrowDown") nextDir = {x:0, y:1};
+        if(e.key === "ArrowLeft") nextDir = {x:-1, y:0};
+        if(e.key === "ArrowRight") nextDir = {x:1, y:0};
     });
+
+    function addNewLog() {
+        let val = document.getElementById('newLogInput').value;
+        if(!val) return;
+        let item = document.createElement('div');
+        item.className = "timeline-item";
+        item.innerHTML = `<span class="version-tag">Yeni</span> ${val}`;
+        document.getElementById('timelineArea').prepend(item);
+        document.getElementById('newLogInput').value = "";
+    }
 </script>
 </body>
 </html>
