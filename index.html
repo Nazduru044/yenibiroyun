@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v1.9.0</title>
+    <title>Naz Duru | Portfolyo v2.1.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -46,24 +46,21 @@
         /* Hobilerim */
         .hobbies-container { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
         .hobby-tag { background: white; border: 2px solid var(--baby-blue); padding: 10px 20px; border-radius: 25px; font-weight: 600; transition: 0.3s; }
-        .hobby-tag:hover { background: var(--baby-blue); color: white; transform: scale(1.1); }
 
-        /* Film Kartları */
+        /* Film Kartları (Görseller Güncellendi) */
         .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
-        .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; cursor: pointer; transition: 0.3s; }
-        .movie-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .movie-card img { width: 100%; height: 280px; object-fit: cover; }
-        .movie-info { padding: 15px; text-align: center; }
+        .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; cursor: pointer; transition: 0.3s; height: 100%; display: flex; flex-direction: column; }
+        .movie-card img { width: 100%; height: 300px; object-fit: cover; background: #eee; }
+        .movie-info { padding: 15px; text-align: center; flex-grow: 1; }
 
-        /* Modal (Uzun Özetler İçin) */
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
-        .modal-content { background: white; margin: 5% auto; padding: 35px; border-radius: 25px; width: 85%; max-width: 600px; text-align: left; position: relative; border: 5px solid var(--baby-blue); max-height: 80vh; overflow-y: auto; }
+        .modal-content { background: white; margin: 5% auto; padding: 35px; border-radius: 25px; width: 85%; max-width: 600px; position: relative; border: 5px solid var(--baby-blue); max-height: 80vh; overflow-y: auto; }
         .close-btn { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: var(--baby-pink); }
 
         /* Oyunlar */
         .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
         .game-card { background: white; padding: 20px; text-align: center; border-radius: 20px; cursor: pointer; border: 2px solid #f0f0f0; transition: 0.3s; font-weight: 600; }
-        .game-card:hover { border-color: var(--baby-blue); background: #f9ffff; }
         #game-area { background: #2d3436; padding: 20px; border-radius: 25px; display: none; text-align: center; margin-top: 20px; }
         canvas { background: #000; border-radius: 15px; border: 4px solid #3d4446; max-width: 100%; }
         
@@ -90,7 +87,7 @@
         </ul>
     </nav>
     <div class="header-right">
-        <span class="version-badge" style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v1.9.0</span>
+        <span class="version-badge" style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.1.0</span>
     </div>
 </header>
 
@@ -113,43 +110,42 @@
     <section id="movies">
         <h2 style="text-align: center; color: var(--baby-pink);">🎬 Favori Filmlerim</h2>
         <div class="movie-grid">
-            <div class="movie-card" onclick="openModal('Avengers: Endgame', 'Thanos\'un evrenin yarısını yok etmesinin ardından Yenilmezler, tarihin en büyük ve en riskli planını devreye sokarlar. Kaybettikleri dostlarını geri getirmek ve zamanı eski haline döndürmek için kuantum evrenine yolculuk ederler. Kaptan Amerika, Iron Man ve Thor liderliğindeki ekip, her bir sonsuzluk taşını geçmişten toplamak zorundadır. Bu sadece bir savaş değil, dostluğun, fedakarlığın ve bir devrin görkemli finalidir. Sinema tarihinin en epik sahneleriyle dolu bu film, kahramanlarımızın sınırlarını zorladığı duygusal bir yolculuk sunuyor.')">
+            <div class="movie-card" onclick="openModal('Avengers: Endgame', 'Evrenin yarısını yok eden Thanos\'un ardından Yenilmezler her şeyi geri getirmek için zaman yolculuğuna çıkar...')">
                 <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80" alt="Avengers">
                 <div class="movie-info"><h4>Avengers: Endgame</h4></div>
             </div>
-            <div class="movie-card" onclick="openModal('Spider-Man: No Way Home', 'Peter Parker\'ın gizli kimliği tüm dünyaya ifşa edildiğinde, hayatı altüst olur. Bu kaosu düzeltmesi için Doktor Strange\'den yardım ister. Ancak yapılan büyü ters gider ve çoklu evrenlerin kapıları açılır. Peter, daha önce başka dünyalarda karşılaştığı efsanevi düşmanlarla yüzleşmek zorunda kalır. Green Goblin, Doctor Octopus ve Electro gibi kötülerin yanı sıra, kendi kaderini belirlemek için zorlu seçimler yapacaktır. Hem aksiyon dolu hem de kalbinizi ısıtacak olan bu hikaye, sorumluluk almanın ve kahraman olmanın gerçek anlamını sorgulatıyor.')">
+            <div class="movie-card" onclick="openModal('Spider-Man: No Way Home', 'Peter Parker\'ın kimliği ifşa olduğunda, çoklu evrenlerin kapıları açılır ve efsanevi düşmanlar geri döner...')">
                 <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=500&q=80" alt="Spider-Man">
                 <div class="movie-info"><h4>Spider-Man: No Way Home</h4></div>
             </div>
-            <div class="movie-card" onclick="openModal('Titanic', 'Asla batmaz denilen devasa Titanic gemisinin 1912 yılındaki hazin öyküsü... Zengin bir ailenin kızı olan Rose ve özgür ruhlu genç bir ressam olan Jack, sınıfsal farklılıklara rağmen gemide imkansız bir aşka tutulurlar. Gemi bir buzdağına doğru ilerlerken, bu büyük aşkın zamana ve kadere karşı direnişine tanık oluyoruz. Rose\'un monoton hayatından Jack ile kaçış planları, buz gibi sularla gelen trajediyle birleşir. Celine Dion\'un unutulmaz sesiyle hafızalara kazınan bu film, tarihin en hüzünlü ve unutulmaz aşk hikayelerinden biri olarak kabul ediliyor.')">
-                <img src="https://m.media-amazon.com/images/M/MV/BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" alt="Titanic">
+            <div class="movie-card" onclick="openModal('Titanic', 'Jack ve Rose arasındaki unutulmaz aşk, tarihin en hüzünlü deniz kazasıyla Titanic gemisinde buluşuyor...')">
+                <img src="https://images.unsplash.com/photo-1500077423678-25eead48513a?auto=format&fit=crop&w=500&q=80" alt="Titanic">
                 <div class="movie-info"><h4>Titanic</h4></div>
             </div>
-            <div class="movie-card" onclick="openModal('Coco', 'Müzik yapmanın nesillerdir yasak olduğu bir ailede büyüyen küçük Miguel, hayali olan gitaristlik için yanıp tutuşmaktadır. Ölüler Günü\'nde efsanevi gitarist Ernesto de la Cruz\'un mezarında yaşanan gizemli bir olay, Miguel\'i büyüleyici ve rengarenk Ölüler Diyarı\'na götürür. Orada atalarının sırlarını çözerken, ailenin, geleneğin ve hatıraların ne kadar kıymetli olduğunu öğrenir. Sadece çocuklar için değil, her yaştan insanın kalbine dokunan bu animasyon, şarkıları ve derin anlamıyla sinema dünyasının en değerli yapımlarından biri.')">
-                <img src="https://images.unsplash.com/photo-1594908900066-3f47337549d8?auto=format&fit=crop&w=500&q=80" alt="Coco">
+            <div class="movie-card" onclick="openModal('Coco', 'Müzik tutkunu Miguel, ailesinin gizemli geçmişini çözmek için Ölüler Diyarı\'nda rengarenk bir yolculuğa çıkar...')">
+                <img src="https://images.unsplash.com/photo-1585647347384-2593bc35786b?auto=format&fit=crop&w=500&q=80" alt="Coco">
                 <div class="movie-info"><h4>Coco</h4></div>
             </div>
         </div>
     </section>
 
-    <section id="notes">
-        <div class="note-box">
-            <h2 style="color: var(--baby-pink);">Derslerine iyi çalış! ✍️✨</h2>
-            <p>Sen her şeyi başarabilirsin Naz Duru. Hedeflerine odaklan!</p>
-        </div>
-    </section>
-
     <section id="games">
-        <h2 style="text-align: center;">🎮 Oyunlar Dünyası</h2>
         <div class="game-grid">
             <div class="game-card" onclick="startGame('snake')">🐍 Yılan</div>
             <div class="game-card" onclick="startGame('tetris')">🧱 Tetris</div>
             <div class="game-card" onclick="startGame('pacman')">🍕 Pacman</div>
         </div>
         <div id="game-area">
-            <h3 id="game-title" style="color:white; margin-top:0;"></h3>
+            <h3 id="game-title" style="color:white;"></h3>
             <canvas id="gameCanvas"></canvas>
             <div id="scoreText" style="font-size: 22px; color: var(--baby-blue); margin-top: 10px; font-weight: bold;">Skor: 0</div>
+        </div>
+    </section>
+
+    <section id="notes">
+        <div class="note-box">
+            <h2 style="color: var(--baby-pink);">Derslerine iyi çalış! ✍️✨</h2>
+            <p>Sen her şeyi başarabilirsin Naz Duru.</p>
         </div>
     </section>
 </div>
@@ -167,7 +163,6 @@
         document.getElementById('movieModal').style.display = "block";
     }
     function closeModal() { document.getElementById('movieModal').style.display = "none"; }
-    window.onclick = function(e) { if(e.target == document.getElementById('movieModal')) closeModal(); }
 
     let canvas = document.getElementById("gameCanvas");
     let ctx = canvas.getContext("2d");
@@ -186,25 +181,65 @@
         if(game === 'pacman') initPacman();
     }
 
-    // --- TETRİS (YENİLENMİŞ) ---
-    let t_pos;
+    // --- TETRİS OYUNU ---
+    let board, currentPiece;
+    const ROWS = 20, COLS = 12, SIZE = 20;
+
     function initTetris() {
-        canvas.width = 240; canvas.height = 400;
-        t_pos = {x: 80, y: 0};
-        document.getElementById('game-title').innerText = "Tetris: Blokları Sağa Sola Kaydır!";
-        gameLoop = setInterval(() => {
-            ctx.fillStyle = "#000"; ctx.fillRect(0,0,240,400);
-            t_pos.y += 10;
-            if(t_pos.y > 360) {
-                t_pos.y = 0; t_pos.x = Math.floor(Math.random()*5)*40;
-                score += 20; document.getElementById('scoreText').innerText = "Skor: " + score;
-            }
-            ctx.fillStyle = "#89CFF0"; ctx.fillRect(t_pos.x, t_pos.y, 40, 40);
-            ctx.strokeStyle = "white"; ctx.strokeRect(t_pos.x, t_pos.y, 40, 40);
-        }, 150);
+        canvas.width = COLS * SIZE; canvas.height = ROWS * SIZE;
+        board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
+        spawnPiece();
+        document.getElementById('game-title').innerText = "Tetris: Blokları Yerleştir!";
+        gameLoop = setInterval(updateTetris, 400);
     }
 
-    // --- YILAN (İDEAL HIZ) ---
+    function spawnPiece() {
+        currentPiece = { x: 5, y: 0, color: "#89CFF0" };
+        if (board[0][5] !== 0) { alert("Oyun Bitti!"); stopGame(); }
+    }
+
+    function updateTetris() {
+        if (canMove(0, 1)) {
+            currentPiece.y++;
+        } else {
+            lockPiece();
+            clearLines();
+            spawnPiece();
+        }
+        drawTetris();
+    }
+
+    function canMove(dx, dy) {
+        let newX = currentPiece.x + dx;
+        let newY = currentPiece.y + dy;
+        return newX >= 0 && newX < COLS && newY < ROWS && board[newY][newX] === 0;
+    }
+
+    function lockPiece() {
+        board[currentPiece.y][currentPiece.x] = currentPiece.color;
+    }
+
+    function clearLines() {
+        for (let r = ROWS - 1; r >= 0; r--) {
+            if (board[r].every(cell => cell !== 0)) {
+                board.splice(r, 1);
+                board.unshift(Array(COLS).fill(0));
+                score += 100;
+                document.getElementById('scoreText').innerText = "Skor: " + score;
+            }
+        }
+    }
+
+    function drawTetris() {
+        ctx.fillStyle = "#000"; ctx.fillRect(0,0,canvas.width,canvas.height);
+        board.forEach((row, r) => row.forEach((cell, c) => {
+            if(cell) { ctx.fillStyle = cell; ctx.fillRect(c*SIZE, r*SIZE, SIZE-1, SIZE-1); }
+        }));
+        ctx.fillStyle = currentPiece.color;
+        ctx.fillRect(currentPiece.x*SIZE, currentPiece.y*SIZE, SIZE-1, SIZE-1);
+    }
+
+    // --- YILAN OYUNU ---
     let snake, food, dx, dy;
     function initSnake() {
         canvas.width = 400; canvas.height = 400; dx = 20; dy = 0;
@@ -218,7 +253,7 @@
                 score += 10; document.getElementById('scoreText').innerText = "Skor: " + score;
                 food = {x: Math.floor(Math.random()*19)*20, y: Math.floor(Math.random()*19)*20};
             } else snake.pop();
-            if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400) startGame('snake');
+            if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400) { alert("Yandın!"); stopGame(); }
             ctx.fillStyle = "var(--baby-blue)"; snake.forEach(s => ctx.fillRect(s.x, s.y, 18, 18));
             ctx.fillStyle = "var(--baby-pink)"; ctx.fillRect(food.x, food.y, 18, 18);
         }, 150);
@@ -230,11 +265,12 @@
         canvas.width = 400; canvas.height = 400;
         pac = {x: 200, y: 200, s: 15}; ghost = {x: 50, y: 50, speed: 2};
         dots = []; for(let i=0; i<8; i++) dots.push({x: Math.random()*360+20, y: Math.random()*360+20});
+        document.getElementById('game-title').innerText = "Pacman: Hayaletten Kaç!";
         gameLoop = setInterval(() => {
             ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
             if(ghost.x < pac.x) ghost.x += ghost.speed; else ghost.x -= ghost.speed;
             if(ghost.y < pac.y) ghost.y += ghost.speed; else ghost.y -= ghost.speed;
-            if(Math.hypot(pac.x-ghost.x, pac.y-ghost.y) < 25) { alert("Düşman yakaladı!"); startGame('pacman'); }
+            if(Math.hypot(pac.x-ghost.x, pac.y-ghost.y) < 25) { alert("Düşman Yakaladı!"); stopGame(); }
             ctx.fillStyle = "yellow"; ctx.beginPath(); ctx.arc(pac.x, pac.y, 15, 0.2*Math.PI, 1.8*Math.PI); ctx.lineTo(pac.x, pac.y); ctx.fill();
             ctx.fillStyle = "red"; ctx.beginPath(); ctx.arc(ghost.x, ghost.y, 15, 0, Math.PI*2); ctx.fill();
             ctx.fillStyle = "white"; dots.forEach((d, i) => {
@@ -251,14 +287,15 @@
             if(e.key === "ArrowLeft" && dx === 0) { dx = -20; dy = 0; }
             if(e.key === "ArrowRight" && dx === 0) { dx = 20; dy = 0; }
         }
+        if(activeGame === 'tetris') {
+            if(e.key === "ArrowLeft" && canMove(-1, 0)) currentPiece.x--;
+            if(e.key === "ArrowRight" && canMove(1, 0)) currentPiece.x++;
+            if(e.key === "ArrowDown" && canMove(0, 1)) currentPiece.y++;
+            drawTetris();
+        }
         if(activeGame === 'pacman') {
             if(e.key === "ArrowUp") pac.y -= 15; if(e.key === "ArrowDown") pac.y += 15;
             if(e.key === "ArrowLeft") pac.x -= 15; if(e.key === "ArrowRight") pac.x += 15;
-        }
-        if(activeGame === 'tetris') {
-            if(e.key === "ArrowLeft" && t_pos.x > 0) t_pos.x -= 40;
-            if(e.key === "ArrowRight" && t_pos.x < 200) t_pos.x += 40;
-            if(e.key === "ArrowDown") t_pos.y += 20;
         }
     });
 </script>
