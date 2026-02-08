@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v2.2.0</title>
+    <title>Naz Duru | Portfolyo v2.2.1</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -53,10 +53,12 @@
         .movie-card img { width: 100%; height: 280px; object-fit: cover; }
         .movie-info { padding: 15px; text-align: center; }
 
-        /* Günlük ve Notlar */
-        .diary-box, .note-box { background: white; padding: 30px; border-radius: 25px; border: 3px dashed var(--baby-blue); margin-top: 20px; }
+        /* Günlük (Versiyon Geçmişi Tasarımı) */
+        .diary-box { background: white; padding: 30px; border-radius: 25px; border: 3px dashed var(--baby-blue); margin-top: 20px; }
         .diary-entry { border-bottom: 1px solid #eee; padding: 15px 0; }
-        .diary-date { color: var(--baby-pink); font-weight: bold; font-size: 0.9rem; }
+        .diary-entry:last-child { border-bottom: none; }
+        .version-tag { background: var(--baby-blue); color: white; padding: 3px 10px; border-radius: 10px; font-size: 0.8rem; font-weight: bold; margin-right: 10px; }
+        .diary-date { color: var(--baby-pink); font-size: 0.85rem; font-weight: bold; }
 
         /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
@@ -68,6 +70,8 @@
         .game-card { background: white; padding: 20px; text-align: center; border-radius: 20px; cursor: pointer; border: 2px solid #f0f0f0; font-weight: bold; }
         #game-area { background: #2d3436; padding: 20px; border-radius: 25px; display: none; text-align: center; margin-top: 20px; }
         canvas { background: #000; border-radius: 15px; border: 4px solid #3d4446; max-width: 100%; }
+        
+        .note-box { background: white; padding: 30px; border-radius: 25px; border: 3px dashed var(--baby-pink); margin-top: 20px; text-align: center; }
     </style>
 </head>
 <body>
@@ -91,7 +95,7 @@
         </ul>
     </nav>
     <div class="header-right">
-        <span class="version-badge" style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.2.0</span>
+        <span class="version-badge" style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.2.1</span>
     </div>
 </header>
 
@@ -112,15 +116,27 @@
     </section>
 
     <section id="diary">
-        <h2 style="text-align: center; color: var(--baby-blue);">📝 Sevgili Günlük</h2>
+        <h2 style="text-align: center; color: var(--baby-blue);">📝 Güncelleme Günlüğü</h2>
         <div class="diary-box">
             <div class="diary-entry">
-                <span class="diary-date">Bugün</span>
-                <p>Web sitemi güncelledim ve her şeyi tam istediğim gibi yaptım! Oyunlar artık çalışıyor ve favori filmlerim harika görünüyor. 🚀</p>
+                <div><span class="version-tag">v2.2.1</span><span class="diary-date">08.02.2026</span></div>
+                <p>• Günlük sayfası teknik bir "Versiyon Geçmişi" yapısına dönüştürüldü.<br>
+                   • Tüm menü geçişleri ve oyun kontrolleri optimize edildi.</p>
             </div>
             <div class="diary-entry">
-                <span class="diary-date">Dün</span>
-                <p>Yeni kodlar öğrendim ve portfolyomu daha renkli hale getirdim. Kendimi geliştirmek harika bir duygu! ✨</p>
+                <div><span class="version-tag">v2.1.0</span><span class="diary-date">07.02.2026</span></div>
+                <p>• <b>Görsel Tamiri:</b> Titanic ve Coco filmlerinin yüklenmeyen resimleri güncellendi.<br>
+                   • <b>Tetris Fix:</b> "Yakında eklenecek" uyarısı kaldırıldı ve oyun tamamen aktif edildi.</p>
+            </div>
+            <div class="diary-entry">
+                <div><span class="version-tag">v2.0.0</span><span class="diary-date">06.02.2026</span></div>
+                <p>• <b>Yeni Oyun Motoru:</b> Tetris'e "Yerçekimi" ve "Sıra Patlatma" özellikleri eklendi.<br>
+                   • <b>Film Özetleri:</b> Filmlere tıklandığında açılan detaylı bilgi ekranı (Modal) tasarlandı.</p>
+            </div>
+            <div class="diary-entry">
+                <div><span class="version-tag">v1.0.0</span><span class="diary-date">01.02.2026</span></div>
+                <p>• Naz Duru Portfolyo sitesi temelleri atıldı.<br>
+                   • Ana sayfa, Yılan oyunu ve Temel menü yapısı oluşturuldu.</p>
             </div>
         </div>
     </section>
@@ -162,8 +178,8 @@
 
     <section id="notes">
         <div class="note-box">
-            <h2 style="color: var(--baby-pink);">Ders Notları ✍️</h2>
-            <p>Naz Duru, hayallerin için derslerine odaklanmayı unutma. Sen çok başarılı olacaksın! ✨</p>
+            <h2 style="color: var(--baby-pink);">Naz Duru'ya Not ✍️</h2>
+            <p>Hayallerin için derslerine odaklanmayı unutma. Sen çok başarılı olacaksın! ✨</p>
         </div>
     </section>
 </div>
@@ -199,48 +215,38 @@
         if(game === 'pacman') initPacman();
     }
 
-    // TETRİS MANTIĞI
+    // TETRİS
     let board, currentPiece;
     const ROWS = 20, COLS = 12, SIZE = 20;
-
     function initTetris() {
         canvas.width = COLS * SIZE; canvas.height = ROWS * SIZE;
         board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
         spawnPiece();
-        document.getElementById('game-title').innerText = "Tetris: Blokları Doldur!";
+        document.getElementById('game-title').innerText = "Tetris Modu";
         gameLoop = setInterval(updateTetris, 400);
     }
-
     function spawnPiece() {
         currentPiece = { x: 5, y: 0, color: "#89CFF0" };
         if (board[0][5] !== 0) { alert("Oyun Bitti!"); stopGame(); }
     }
-
     function updateTetris() {
         if (canMove(0, 1)) { currentPiece.y++; } 
         else { lockPiece(); clearLines(); spawnPiece(); }
         drawTetris();
     }
-
     function canMove(dx, dy) {
-        let newX = currentPiece.x + dx;
-        let newY = currentPiece.y + dy;
+        let newX = currentPiece.x + dx; let newY = currentPiece.y + dy;
         return newX >= 0 && newX < COLS && newY < ROWS && board[newY][newX] === 0;
     }
-
     function lockPiece() { board[currentPiece.y][currentPiece.x] = currentPiece.color; }
-
     function clearLines() {
         for (let r = ROWS - 1; r >= 0; r--) {
             if (board[r].every(cell => cell !== 0)) {
-                board.splice(r, 1);
-                board.unshift(Array(COLS).fill(0));
-                score += 100;
-                document.getElementById('scoreText').innerText = "Skor: " + score;
+                board.splice(r, 1); board.unshift(Array(COLS).fill(0));
+                score += 100; document.getElementById('scoreText').innerText = "Skor: " + score;
             }
         }
     }
-
     function drawTetris() {
         ctx.fillStyle = "#000"; ctx.fillRect(0,0,canvas.width,canvas.height);
         board.forEach((row, r) => row.forEach((cell, c) => {
@@ -249,7 +255,7 @@
         ctx.fillStyle = currentPiece.color; ctx.fillRect(currentPiece.x*SIZE, currentPiece.y*SIZE, SIZE-1, SIZE-1);
     }
 
-    // YILAN MANTIĞI
+    // YILAN
     let snake, food, dx, dy;
     function initSnake() {
         canvas.width = 400; canvas.height = 400; dx = 20; dy = 0;
@@ -268,7 +274,7 @@
         }, 150);
     }
 
-    // PACMAN MANTIĞI
+    // PACMAN
     let pac, ghost, dots;
     function initPacman() {
         canvas.width = 400; canvas.height = 400;
