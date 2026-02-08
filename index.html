@@ -164,7 +164,19 @@
                 <div><span class="version-tag">v3.0.0</span><span class="entry-date">Bugün</span></div>
                 <div class="entry-content"><strong>Tam Arşiv & Dashboard 🌈</strong><p>Ana sayfa interaktif kartlarla yenilendi. Pacman motoru ve film arşivi stabilize edildi.</p></div>
             </div>
+            <div class="timeline-item">
+                <div><span class="version-tag">v2.9.0</span><span class="entry-date">Bugün</span></div>
+                <div class="entry-content"><strong>Akıllı Günlük Sistemi 📔</strong><p>Artık anılarını kaydedebilirsin! Yazdıkların tarayıcı hafızasında saklanır.</p></div>
             </div>
+            <div class="timeline-item">
+                <div><span class="version-tag">v2.8.0</span><span class="entry-date">Dün</span></div>
+                <div class="entry-content"><strong>Sinema Detayları 🎬</strong><p>Filmlerin altına konularını anlatan kısa özetler eklendi.</p></div>
+            </div>
+            <div class="timeline-item">
+                <div><span class="version-tag">v1.0.0</span><span class="entry-date">Başlangıç</span></div>
+                <div class="entry-content"><strong>Merhaba Dünya! 🌍</strong><p>Naz Duru'nun kişisel web sitesi yayına alındı.</p></div>
+            </div>
+        </div>
     </section>
 
     <section id="movies">
@@ -181,6 +193,14 @@
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=500&q=80">
                 <div class="movie-info"><h4>Harry Potter</h4><p>Sihir dünyasına adım atan genç bir büyücünün hikayesi.</p></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1500077423678-25eead48513a?auto=format&fit=crop&w=500&q=80">
+                <div class="movie-info"><h4>Titanic</h4><p>Tarihin en büyük gemisinde yaşanan unutulmaz aşk.</p></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=500&q=80">
+                <div class="movie-info"><h4>Coco</h4><p>Müzik tutkunu Miguel'in ölüler diyarındaki macerası.</p></div>
             </div>
         </div>
     </section>
@@ -247,7 +267,6 @@
     }
 
     function stopGame() { 
-        cancelAnimationFrame(gameLoop);
         clearTimeout(gameLoop); 
         clearInterval(gameLoop); 
         document.getElementById('game-area').style.display = "none"; 
@@ -333,15 +352,10 @@
     function renderTetris() { ctx.fillStyle = "black"; ctx.fillRect(0,0,canvas.width,canvas.height); board.forEach((r, ri) => r.forEach((c, ci) => { if(c) { ctx.fillStyle = c; ctx.fillRect(ci*SIZE, ri*SIZE, SIZE-1, SIZE-1); } })); currentPiece.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { ctx.fillStyle = currentPiece.color; ctx.fillRect((currentPiece.x+dx)*SIZE, (currentPiece.y+dy)*SIZE, SIZE-1, SIZE-1); } })); }
     function drawSide(id, p) { const c = document.getElementById(id).getContext('2d'); c.fillStyle = "#3d4446"; c.fillRect(0,0,80,80); p.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { c.fillStyle = p.color; c.fillRect(dx*15+20, dy*15+20, 14, 14); } })); }
 
-    // --- PACMAN MOTORU (YENİLENMİŞ) ---
+    // --- PACMAN MOTORU ---
     function startPacman() {
         canvas.width = 400; canvas.height = 400;
-        const ts = 20; 
-        let p = { x: 1, y: 1 };
-        let ghost = { x: 18, y: 18 };
-        let pPix = { x: 20, y: 20 };
-        let gPix = { x: 360, y: 360 };
-        
+        const ts = 20; let p = { x: 1, y: 1 }, ghost = { x: 18, y: 18 }, pPix = { x: 20, y: 20 }, gPix = { x: 360, y: 360 };
         const map = [
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
@@ -364,59 +378,27 @@
             [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
         ];
-
-        let dots = []; 
-        for(let r=0; r<20; r++) for(let c=0; c<20; c++) if(map[r][c] === 0) dots.push({r, c});
-
-        let lastTick = 0;
-        const tickRate = 160; 
-
-        function gameStep(timestamp) {
-            if (!lastTick) lastTick = timestamp;
-            if (timestamp - lastTick > tickRate) {
-                // Pacman Hareketi
-                let nX = p.x + nextDir.x;
-                let nY = p.y + nextDir.y;
-                if(map[nY] && map[nY][nX] === 0) { p.x = nX; p.y = nY; }
-
-                // Hayalet Hareketi
-                if(Math.random() > 0.4){
-                    let dx = p.x - ghost.x, dy = p.y - ghost.y;
-                    if(Math.abs(dx) > Math.abs(dy)) {
-                        let sx = dx > 0 ? 1 : -1;
-                        if(map[ghost.y][ghost.x+sx] === 0) ghost.x += sx;
-                    } else {
-                        let sy = dy > 0 ? 1 : -1;
-                        if(map[ghost.y+sy][ghost.x] === 0) ghost.y += sy;
-                    }
-                }
-
-                dots = dots.filter(d => { 
-                    if(d.r === p.y && d.c === p.x){ score += 10; document.getElementById('scoreVal').innerText = score; return false; } 
-                    return true; 
-                });
-                lastTick = timestamp;
+        let dots = []; for(let r=0;r<20;r++) for(let c=0;c<20;c++) if(map[r][c]===0) dots.push({r,c});
+        gameLoop = setInterval(() => {
+            let nX = p.x + nextDir.x, nY = p.y + nextDir.y;
+            if(map[nY] && map[nY][nX]===0){ p.x=nX; p.y=nY; }
+            pPix.x += (p.x*ts-pPix.x)*0.3; pPix.y += (p.y*ts-pPix.y)*0.3;
+            if(Math.random()>0.4){
+                if(ghost.x<p.x && map[ghost.y][ghost.x+1]===0) ghost.x++;
+                else if(ghost.x>p.x && map[ghost.y][ghost.x-1]===0) ghost.x--;
+                else if(ghost.y<p.y && map[ghost.y+1][ghost.x]===0) ghost.y++;
+                else if(ghost.y>p.y && map[ghost.y-1][ghost.x]===0) ghost.y--;
             }
-
-            pPix.x += (p.x * ts - pPix.x) * 0.15;
-            pPix.y += (p.y * ts - pPix.y) * 0.15;
-            gPix.x += (ghost.x * ts - gPix.x) * 0.1;
-            gPix.y += (ghost.y * ts - gPix.y) * 0.1;
-
-            if(Math.abs(pPix.x - gPix.x) < 15 && Math.abs(pPix.y - gPix.y) < 15){ alert("Yakalandın!"); stopGame(); return; }
-
-            ctx.fillStyle = "#111"; ctx.fillRect(0, 0, 400, 400);
-            for(let r=0; r<20; r++) for(let c=0; c<20; c++) if(map[r][c] === 1) { ctx.fillStyle = "#34495e"; ctx.fillRect(c * ts, r * ts, ts - 1, ts - 1); }
-            ctx.fillStyle = "#ff7675"; dots.forEach(d => { ctx.beginPath(); ctx.arc(d.c * ts + 10, d.r * ts + 10, 2, 0, Math.PI * 2); ctx.fill(); });
-            ctx.fillStyle = "#e74c3c"; ctx.fillRect(gPix.x + 2, gPix.y + 2, 16, 16);
-            ctx.fillStyle = "#f1c40f"; ctx.beginPath();
-            let open = (Math.floor(timestamp / 200) % 2 === 0) ? 0.2 : 0.05;
-            ctx.arc(pPix.x + 10, pPix.y + 10, 8, open * Math.PI, (2 - open) * Math.PI);
-            ctx.lineTo(pPix.x + 10, pPix.y + 10); ctx.fill();
-
-            gameLoop = requestAnimationFrame(gameStep);
-        }
-        gameLoop = requestAnimationFrame(gameStep);
+            gPix.x += (ghost.x*ts-gPix.x)*0.1; gPix.y += (ghost.y*ts-gPix.y)*0.1;
+            dots = dots.filter(d => { if(d.r===p.y && d.c===p.x){ score+=10; document.getElementById('scoreVal').innerText=score; return false; } return true; });
+            if(Math.abs(pPix.x-gPix.x)<15 && Math.abs(pPix.y-gPix.y)<15){ alert("Yakalandın!"); stopGame(); return; }
+            ctx.fillStyle="#111"; ctx.fillRect(0,0,400,400);
+            for(let r=0;r<20;r++) for(let c=0;c<20;c++) if(map[r][c]===1){ ctx.fillStyle="#34495e"; ctx.fillRect(c*ts,r*ts,ts-1,ts-1); }
+            ctx.fillStyle="#ff7675"; dots.forEach(d=> { ctx.beginPath(); ctx.arc(d.c*ts+10, d.r*ts+10, 2, 0, Math.PI*2); ctx.fill(); });
+            ctx.fillStyle="#e74c3c"; ctx.fillRect(gPix.x+2, gPix.y+2, 16, 16);
+            ctx.fillStyle="#f1c40f"; ctx.beginPath();
+            let a = (Date.now()%400<200)?0.2:0.05; ctx.arc(pPix.x+10, pPix.y+10, 8, a*Math.PI, (2-a)*Math.PI); ctx.lineTo(pPix.x+10, pPix.y+10); ctx.fill();
+        }, 100);
     }
 
     window.addEventListener("keydown", e => {
