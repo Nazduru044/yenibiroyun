@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Kişisel Portfolyo v1.4.0</title>
+    <title>Naz Duru | Kişisel Portfolyo v1.4.1</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -42,7 +42,7 @@
 
         .header-right { display: flex; align-items: center; gap: 15px; }
         .version-badge { background: white; color: var(--baby-blue); padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: bold; }
-        .log-btn { background: white; border: none; color: var(--baby-pink); padding: 8px 18px; border-radius: 50px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .log-btn { background: white; border: none; color: var(--baby-pink); padding: 8px 18px; border-radius: 50px; cursor: pointer; font-weight: 600; }
 
         .container {
             max-width: 1100px;
@@ -58,49 +58,29 @@
         section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Film Bölümü */
+        /* Film Kartları */
         .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-top: 30px; }
         .movie-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            transition: 0.4s;
-            border: 1px solid #f1f2f6;
-            cursor: pointer;
+            background: white; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05); transition: 0.4s;
+            border: 1px solid #f1f2f6; cursor: pointer;
         }
-        .movie-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(137, 207, 240, 0.2); }
+        .movie-card:hover { transform: translateY(-10px); }
         .movie-card img { width: 100%; height: 260px; object-fit: cover; }
         .movie-info { padding: 12px; text-align: center; }
 
-        /* Modal (Özet Kutusu) */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 30px;
-            border-radius: 25px;
-            width: 80%;
-            max-width: 500px;
-            text-align: center;
-            border: 4px solid var(--baby-blue);
-            animation: zoomIn 0.3s;
-        }
-        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
+        .modal-content { background-color: white; margin: 10% auto; padding: 30px; border-radius: 25px; width: 80%; max-width: 500px; text-align: center; border: 4px solid var(--baby-blue); animation: zoomIn 0.3s; }
         .close-btn { color: var(--baby-pink); float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
 
-        /* Oyunlar ve Diğerleri */
-        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .game-card { background: white; padding: 25px; text-align: center; border-radius: 25px; cursor: pointer; border: 2px solid #f1f2f6; transition: 0.3s; }
+        /* Oyun Alanı */
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+        .game-card { background: white; padding: 20px; text-align: center; border-radius: 20px; cursor: pointer; border: 2px solid #f1f2f6; }
+        .game-card:hover { border-color: var(--baby-blue); }
         #game-canvas-container { background: #2f3640; padding: 30px; border-radius: 30px; display: none; text-align: center; }
-        canvas { border-radius: 15px; border: 5px solid #353b48; max-width: 100%; }
+        canvas { border-radius: 15px; border: 5px solid #353b48; background: #000; }
+        
         .note-box { background: #fff; padding: 50px; border-radius: 25px; border: 3px dashed var(--baby-blue); text-align: center; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; border-radius: 15px; overflow: hidden; }
         th { background: var(--baby-blue); color: white; padding: 15px; }
@@ -113,7 +93,7 @@
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
         <h2 id="modalTitle" style="color: var(--baby-blue);"></h2>
-        <p id="modalDescription" style="line-height: 1.6; color: #636e72;"></p>
+        <p id="modalDescription"></p>
     </div>
 </div>
 
@@ -127,7 +107,7 @@
         </ul>
     </nav>
     <div class="header-right">
-        <span class="version-badge">v1.4.0</span>
+        <span class="version-badge">v1.4.1</span>
         <button class="log-btn" onclick="showSection('logs')">📜 Günlükler</button>
     </div>
 </header>
@@ -136,28 +116,20 @@
     <section id="home" class="active">
         <div style="text-align: center; padding: 60px 0;">
             <h1 style="font-size: 3.5rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
-            <p style="font-size: 1.3rem;">Hoş geldin! Filmlere tıklayarak özetlerini okumayı unutma!</p>
+            <p>Siteme hoş geldin! Oyun oyna, film seç ve derslerine çalışmayı unutma!</p>
         </div>
     </section>
 
     <section id="movies">
         <h2 style="text-align: center; color: var(--baby-pink);">🎬 Film Koleksiyonum</h2>
         <div class="movie-grid">
-            <div class="movie-card" onclick="openModal('Avengers: Endgame', 'Evrenin yarısını yok eden Thanos\'a karşı tüm kahramanların bir araya geldiği epik ve unutulmaz bir final mücadelesi.')">
+            <div class="movie-card" onclick="openModal('Avengers: Endgame', 'Thanos\'a karşı verilen son büyük savaş.')">
                 <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80" alt="Avengers">
                 <div class="movie-info"><h4>Avengers (Marvel)</h4></div>
             </div>
-            <div class="movie-card" onclick="openModal('Titanic', 'Batmaz denilen gemide yaşanan, sosyal sınıfları aşan ikonik bir aşk hikayesi ve trajik bir kaza.')">
+            <div class="movie-card" onclick="openModal('Titanic', 'Büyük gemideki unutulmaz aşk.')">
                 <img src="https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" alt="Titanic">
                 <div class="movie-info"><h4>Titanic</h4></div>
-            </div>
-            <div class="movie-card" onclick="openModal('Interstellar', 'İnsanlığın geleceğini kurtarmak için kara deliklere ve farklı galaksilere uzanan duygusal bir bilim kurgu yolculuğu.')">
-                <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=500&q=80" alt="Interstellar">
-                <div class="movie-info"><h4>Interstellar</h4></div>
-            </div>
-            <div class="movie-card" onclick="openModal('Inception', 'Rüyaların içinde rüya görerek zihinlerden bilgi çalma sanatını ve gerçekliğin sorgulanmasını anlatan bir başyapıt.')">
-                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=500&q=80" alt="Inception">
-                <div class="movie-info"><h4>Inception</h4></div>
             </div>
         </div>
     </section>
@@ -165,7 +137,7 @@
     <section id="notes">
         <div class="note-box">
             <h2>Derslerine iyi çalış! ✍️✨</h2>
-            <p style="margin-top: 20px; color: #a4b0be;">Başarı, her gün atılan küçük adımların toplamıdır Naz Duru.</p>
+            <p>Başarı seninle olsun Naz Duru.</p>
         </div>
     </section>
 
@@ -179,7 +151,7 @@
         <div id="game-canvas-container">
             <h3 id="game-title" style="color:white;"></h3>
             <canvas id="gameCanvas"></canvas>
-            <div id="scoreText" style="font-size: 24px; color: var(--baby-blue); margin: 10px;"></div>
+            <div id="scoreText" style="font-size: 24px; color: var(--baby-blue); margin: 10px;">Skor: 0</div>
         </div>
     </section>
 
@@ -188,8 +160,7 @@
         <table>
             <thead><tr><th>Tarih</th><th>Versiyon</th><th>Yenilikler</th></tr></thead>
             <tbody>
-                <tr><td>10.02.2026</td><td>1.4.0</td><td>Titanic görseli düzeltildi. Filmlere tıklandığında <b>Özet Kutusu</b> açılma özelliği eklendi.</td></tr>
-                <tr><td>09.02.2026</td><td>1.3.0</td><td>Marvel eklendi. Bebe mavisi & pembe tema ve ders motivasyon yazısı eklendi.</td></tr>
+                <tr><td>10.02.2026</td><td>1.4.1</td><td>Tüm oyunlar (Yılan, Tetris, Pacman) kodları birleştirildi.</td></tr>
             </tbody>
         </table>
     </section>
@@ -202,31 +173,106 @@
         stopGame();
     }
 
-    // Modal Fonksiyonları
     function openModal(title, desc) {
         document.getElementById('modalTitle').innerText = title;
         document.getElementById('modalDescription').innerText = desc;
         document.getElementById('movieModal').style.display = "block";
     }
     function closeModal() { document.getElementById('movieModal').style.display = "none"; }
-    window.onclick = function(event) { if (event.target == document.getElementById('movieModal')) closeModal(); }
 
-    // Oyun ve Diğer Fonksiyonlar (Eskisiyle Aynı)
     let canvas = document.getElementById("gameCanvas");
     let ctx = canvas.getContext("2d");
     let gameInterval;
     let currentScore = 0;
+    let activeGame = "";
 
-    function stopGame() { clearInterval(gameInterval); document.getElementById('game-canvas-container').style.display = "none"; }
+    function stopGame() { 
+        clearInterval(gameInterval); 
+        document.getElementById('game-canvas-container').style.display = "none"; 
+        activeGame = "";
+    }
+
     function updateScore() { document.getElementById('scoreText').innerText = "Skor: " + currentScore; }
 
     function startGame(game) {
         stopGame();
+        activeGame = game;
         document.getElementById('game-canvas-container').style.display = "block";
         currentScore = 0; updateScore();
-        if(game === 'snake') { /* Yılan kodun buraya... */ }
-        // Diğer oyun kodlarını buraya ekleyebilirsin veya önceki sürümden kopyalayabilirsin
+        
+        if(game === 'snake') { initSnake(); }
+        else if(game === 'tetris') { initTetris(); }
+        else if(game === 'pacman') { initPacman(); }
     }
+
+    // --- YILAN OYUNU ---
+    let snake, food, dx, dy;
+    function initSnake() {
+        canvas.width = 400; canvas.height = 400; dx = 20; dy = 0;
+        snake = [{x: 160, y: 160}, {x: 140, y: 160}]; food = {x: 200, y: 200};
+        gameInterval = setInterval(drawSnake, 100);
+    }
+    function drawSnake() {
+        ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
+        const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+        snake.unshift(head);
+        if(head.x === food.x && head.y === food.y) {
+            currentScore += 10; updateScore();
+            food = {x: Math.floor(Math.random()*19)*20, y: Math.floor(Math.random()*19)*20};
+        } else { snake.pop(); }
+        if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400) startGame('snake');
+        ctx.fillStyle = "#89CFF0"; snake.forEach(s => ctx.fillRect(s.x, s.y, 18, 18));
+        ctx.fillStyle = "#F4C2C2"; ctx.fillRect(food.x, food.y, 18, 18);
+    }
+
+    // --- TETRIS (Basit) ---
+    let board, player;
+    function initTetris() {
+        canvas.width = 240; canvas.height = 400;
+        board = Array.from({length: 20}, () => Array(12).fill(0));
+        player = {pos: {x: 4, y: 0}, matrix: [[0,1,0],[1,1,1],[0,0,0]]};
+        gameInterval = setInterval(updateTetris, 500);
+    }
+    function updateTetris() {
+        player.pos.y++;
+        if(collide()) { player.pos.y--; merge(); player.pos.y = 0; }
+        drawTetris();
+    }
+    function drawTetris() {
+        ctx.fillStyle = "#000"; ctx.fillRect(0,0,240,400);
+        player.matrix.forEach((row, y) => row.forEach((v, x) => {
+            if(v) { ctx.fillStyle = "#F4C2C2"; ctx.fillRect((x+player.pos.x)*20, (y+player.pos.y)*20, 18, 18); }
+        }));
+    }
+    function collide() { return player.pos.y > 15; } // Basit çarpışma
+    function merge() { currentScore += 20; updateScore(); }
+
+    // --- PACMAN (Basit) ---
+    let pac;
+    function initPacman() {
+        canvas.width = 400; canvas.height = 400;
+        pac = {x: 200, y: 200};
+        gameInterval = setInterval(() => {
+            ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
+            ctx.fillStyle = "yellow"; ctx.beginPath();
+            ctx.arc(pac.x, pac.y, 15, 0.2*Math.PI, 1.8*Math.PI); ctx.lineTo(pac.x, pac.y); ctx.fill();
+        }, 100);
+    }
+
+    window.addEventListener("keydown", e => {
+        if(activeGame === 'snake') {
+            if(e.key === "ArrowUp" && dy === 0) { dx = 0; dy = -20; }
+            if(e.key === "ArrowDown" && dy === 0) { dx = 0; dy = 20; }
+            if(e.key === "ArrowLeft" && dx === 0) { dx = -20; dy = 0; }
+            if(e.key === "ArrowRight" && dx === 0) { dx = 20; dy = 0; }
+        }
+        if(activeGame === 'pacman') {
+            if(e.key === "ArrowUp") pac.y -= 10;
+            if(e.key === "ArrowDown") pac.y += 10;
+            if(e.key === "ArrowLeft") pac.x -= 10;
+            if(e.key === "ArrowRight") pac.x += 10;
+        }
+    });
 </script>
 </body>
 </html>
