@@ -43,6 +43,20 @@
         section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* --- ANA SAYFA KARTLARI --- */
+        .home-card {
+            cursor: pointer; background: #fff; padding: 25px; border-radius: 25px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.4s ease;
+            text-align: center; border: 1px solid #f0f0f0;
+        }
+        .home-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .home-card h3 { margin: 15px 0 10px 0; font-size: 1.2rem; }
+        .home-card p { font-size: 0.85rem; color: #777; line-height: 1.5; }
+        .icon-circle { 
+            width: 60px; height: 60px; border-radius: 50%; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center; font-size: 30px;
+        }
+
         /* --- GÜNLÜK / ZAMAN TÜNELİ --- */
         .diary-input {
             background: #f8f9fa; padding: 20px; border-radius: 20px; margin-bottom: 30px;
@@ -106,9 +120,35 @@
 
 <div class="container">
     <section id="home" class="active">
-        <div style="text-align: center; padding: 40px 0;">
-            <h1 style="font-size: 3rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
-            <p>Oyunlar hızlandı, film arşivi tamamlandı ve günlük geçmişi eklendi!</p>
+        <div style="text-align: center; padding: 20px 0;">
+            <div style="background: white; padding: 40px 20px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 40px;">
+                <h1 style="font-size: 3rem; margin: 0; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
+                <p style="font-size: 1.2rem; color: #666; margin-top: 10px;">Yazılım, Oyun ve Sinema: Her şey burada!</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                <div class="home-card" onclick="showSection('games')">
+                    <div class="icon-circle" style="background: #e1f5fe; color: #03a9f4;">🎮</div>
+                    <h3>Oyun Odası</h3>
+                    <p>Neon Yılan, Pro Tetris veya yenilenmiş Pacman motoruyla hemen oynamaya başla!</p>
+                </div>
+
+                <div class="home-card" onclick="showSection('diary')">
+                    <div class="icon-circle" style="background: #fce4ec; color: #f06292;">📝</div>
+                    <h3>Geliştirici Günlüğü</h3>
+                    <p>Projenin v1.0'dan bugüne nasıl geldiğini gör ve kendi notlarını ekle.</p>
+                </div>
+
+                <div class="home-card" onclick="showSection('movies')">
+                    <div class="icon-circle" style="background: #fff3e0; color: #ff9800;">🎬</div>
+                    <h3>Favori Filmler</h3>
+                    <p>Marvel evreninden klasik aşk hikayelerine kadar en sevdiğim film önerileri.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; padding: 20px; background: rgba(137, 207, 240, 0.1); border-radius: 20px;">
+                <p style="font-style: italic; color: #555;">"Kod yazmak bir yolculuktur, her güncelleme yeni bir macera!" 🚀</p>
+            </div>
         </div>
     </section>
 
@@ -122,7 +162,7 @@
         <div class="timeline" id="timelineArea">
             <div class="timeline-item">
                 <div><span class="version-tag">v3.0.0</span><span class="entry-date">Bugün</span></div>
-                <div class="entry-content"><strong>Tam Arşiv & Neon 🌈</strong><p>Yılan oyunu neon efektlerle güçlendirildi. Pacman motoru labirent sistemiyle tamamen yenilendi.</p></div>
+                <div class="entry-content"><strong>Tam Arşiv & Dashboard 🌈</strong><p>Ana sayfa interaktif kartlarla yenilendi. Pacman motoru ve film arşivi stabilize edildi.</p></div>
             </div>
             <div class="timeline-item">
                 <div><span class="version-tag">v2.9.0</span><span class="entry-date">Bugün</span></div>
@@ -130,23 +170,11 @@
             </div>
             <div class="timeline-item">
                 <div><span class="version-tag">v2.8.0</span><span class="entry-date">Dün</span></div>
-                <div class="entry-content"><strong>Sinema Detayları 🎬</strong><p>Filmlerin altına konularını anlatan kısa özetler eklendi. Avengers ve Harry Potter listeye katıldı.</p></div>
-            </div>
-            <div class="timeline-item">
-                <div><span class="version-tag">v2.7.0</span><span class="entry-date">Dün</span></div>
-                <div class="entry-content"><strong>Oyun Onarımı 🛠️</strong><p>Pacman ve Yılan kontrol hataları giderildi. Hayalet yapay zekası yazıldı.</p></div>
-            </div>
-            <div class="timeline-item">
-                <div><span class="version-tag">v2.5.0</span><span class="entry-date">Geçen Hafta</span></div>
-                <div class="entry-content"><strong>Pro Tetris 🧱</strong><p>Tetris'e "Sıradaki Parça" ve "Parça Saklama" özellikleri eklendi.</p></div>
-            </div>
-            <div class="timeline-item">
-                <div><span class="version-tag">v2.0.0</span><span class="entry-date">Geçen Ay</span></div>
-                <div class="entry-content"><strong>Oyun Odası 🎮</strong><p>Siteye ilk kez Yılan ve Pacman oyunları prototip olarak eklendi.</p></div>
+                <div class="entry-content"><strong>Sinema Detayları 🎬</strong><p>Filmlerin altına konularını anlatan kısa özetler eklendi.</p></div>
             </div>
             <div class="timeline-item">
                 <div><span class="version-tag">v1.0.0</span><span class="entry-date">Başlangıç</span></div>
-                <div class="entry-content"><strong>Merhaba Dünya! 🌍</strong><p>Naz Duru'nun kişisel web sitesi yayına alındı. Renk teması oluşturuldu.</p></div>
+                <div class="entry-content"><strong>Merhaba Dünya! 🌍</strong><p>Naz Duru'nun kişisel web sitesi yayına alındı.</p></div>
             </div>
         </div>
     </section>
@@ -156,11 +184,11 @@
         <div class="movie-grid">
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Avengers</h4><p>Kahramanların dünyayı kurtarmak için güçlerini birleştirdiği efsanevi macera.</p></div>
+                <div class="movie-info"><h4>Avengers</h4><p>Kahramanların dünyayı kurtarmak için güçlerini birleştirdiği macera.</p></div>
             </div>
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Spider-Man</h4><p>Peter Parker'ın kahramanlık ve sorumluluk arasındaki dengesi.</p></div>
+                <div class="movie-info"><h4>Spider-Man</h4><p>Peter Parker'ın kahramanlık ve sorumluluk hikayesi.</p></div>
             </div>
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=500&q=80">
@@ -168,11 +196,11 @@
             </div>
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1500077423678-25eead48513a?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Titanic</h4><p>Tarihin en büyük gemisinde yaşanan unutulmaz bir aşk hikayesi.</p></div>
+                <div class="movie-info"><h4>Titanic</h4><p>Tarihin en büyük gemisinde yaşanan unutulmaz aşk.</p></div>
             </div>
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Coco</h4><p>Müzik tutkunu Miguel'in ölüler diyarındaki renkli macerası.</p></div>
+                <div class="movie-info"><h4>Coco</h4><p>Müzik tutkunu Miguel'in ölüler diyarındaki macerası.</p></div>
             </div>
         </div>
     </section>
@@ -235,6 +263,7 @@
         document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         stopGame();
+        window.scrollTo(0, 0);
     }
 
     function stopGame() { 
@@ -268,7 +297,7 @@
         else if(activeGameType === 'pacman') startPacman();
     }
 
-    // --- SNAKE ---
+    // --- SNAKE MOTORU ---
     function startSnake() {
         canvas.width = 400; canvas.height = 400;
         let snake = [{x: 200, y: 200}, {x: 180, y: 200}, {x: 160, y: 200}];
@@ -299,7 +328,7 @@
         step();
     }
 
-    // --- TETRIS ---
+    // --- TETRIS MOTORU ---
     const ROWS = 20, COLS = 10, SIZE = 25;
     let board, currentPiece, nextPiece, holdPiece, canHold;
     const SHAPES = { 'I': [[1,1,1,1]], 'J': [[1,0,0],[1,1,1]], 'L': [[0,0,1],[1,1,1]], 'O': [[1,1],[1,1]], 'S': [[0,1,1],[1,1,0]], 'T': [[0,1,0],[1,1,1]], 'Z': [[1,1,0],[0,1,1]] };
@@ -323,7 +352,7 @@
     function renderTetris() { ctx.fillStyle = "black"; ctx.fillRect(0,0,canvas.width,canvas.height); board.forEach((r, ri) => r.forEach((c, ci) => { if(c) { ctx.fillStyle = c; ctx.fillRect(ci*SIZE, ri*SIZE, SIZE-1, SIZE-1); } })); currentPiece.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { ctx.fillStyle = currentPiece.color; ctx.fillRect((currentPiece.x+dx)*SIZE, (currentPiece.y+dy)*SIZE, SIZE-1, SIZE-1); } })); }
     function drawSide(id, p) { const c = document.getElementById(id).getContext('2d'); c.fillStyle = "#3d4446"; c.fillRect(0,0,80,80); p.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { c.fillStyle = p.color; c.fillRect(dx*15+20, dy*15+20, 14, 14); } })); }
 
-    // --- GELİŞMİŞ PACMAN ---
+    // --- PACMAN MOTORU ---
     function startPacman() {
         canvas.width = 400; canvas.height = 400;
         const ts = 20; let p = { x: 1, y: 1 }, ghost = { x: 18, y: 18 }, pPix = { x: 20, y: 20 }, gPix = { x: 360, y: 360 };
