@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v2.9.0</title>
+    <title>Naz Duru | Portfolyo v2.9.5</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -82,21 +82,23 @@
         .entry-content ul { padding-left: 20px; margin: 5px 0; }
 
         /* Film Kartları */
-        .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; transition: 0.3s; display: flex; flex-direction: column; }
-        .movie-card img { width: 100%; height: 250px; object-fit: cover; }
+        .movie-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .movie-card img { width: 100%; height: 280px; object-fit: cover; }
         .movie-info { padding: 15px; text-align: left; }
-        .movie-info h4 { margin: 0 0 8px 0; color: #333; }
-        .movie-info p { margin: 0; color: #666; font-size: 0.85rem; line-height: 1.4; }
+        .movie-info h4 { margin: 0 0 8px 0; color: #333; font-size: 1.1rem; }
+        .movie-info p { margin: 0; color: #666; font-size: 0.8rem; line-height: 1.4; }
 
         /* Oyunlar */
-        #game-area { background: #2d3436; padding: 20px; border-radius: 25px; display: none; text-align: center; margin-top: 20px; position: relative; }
+        #game-area { background: #2d3436; padding: 20px; border-radius: 25px; display: none; text-align: center; margin-top: 20px; position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.5); }
         .tetris-wrapper { display: flex; justify-content: center; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
         .side-panel { background: #3d4446; padding: 15px; border-radius: 15px; color: white; min-width: 100px; border: 2px solid #555; }
-        canvas { background: #000; border-radius: 10px; border: 4px solid #3d4446; }
+        canvas { background: #000; border-radius: 10px; border: 4px solid #3d4446; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
 
         #tutorial-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10; display: none; flex-direction: column; justify-content: center; align-items: center; color: white; padding: 30px; border-radius: 25px; }
-        .skip-btn { background: var(--baby-pink); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; }
+        .skip-btn { background: var(--baby-pink); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .skip-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px var(--baby-pink); }
     </style>
 </head>
 <body>
@@ -110,14 +112,14 @@
             <li><a onclick="showSection('movies')">🎬 Filmler</a></li>
         </ul>
     </nav>
-    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.9.0</span>
+    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.9.5</span>
 </header>
 
 <div class="container">
     <section id="home" class="active">
         <div style="text-align: center; padding: 40px 0;">
             <h1 style="font-size: 3rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
-            <p>Portfolyo, Oyunlar ve Geliştirici Günlüğü bir arada!</p>
+            <p>Oyunlar hızlandı, film arşivi tamamlandı!</p>
         </div>
     </section>
 
@@ -132,6 +134,21 @@
         <div class="timeline" id="timelineArea">
             <div class="timeline-item">
                 <div>
+                    <span class="version-tag">v2.9.5</span>
+                    <span class="entry-date">Şimdi</span>
+                </div>
+                <div class="entry-content">
+                    <strong>Büyük Oyun & Film Güncellemesi 🚀</strong>
+                    <ul>
+                        <li><b>Yılan Oyunu:</b> Artık neon efektli ve yemek yedikçe hızlanıyor!</li>
+                        <li><b>Filmler:</b> Titanic ve Coco arşive geri eklendi.</li>
+                        <li>Görseller iyileştirildi.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div>
                     <span class="version-tag">v2.9.0</span>
                     <span class="entry-date">Bugün</span>
                 </div>
@@ -140,78 +157,45 @@
                     <p>Artık yapılan tüm değişiklikler tarih sırasına göre burada listeleniyor.</p>
                 </div>
             </div>
-
-            <div class="timeline-item">
-                <div>
-                    <span class="version-tag">v2.8.5</span>
-                    <span class="entry-date">Dün</span>
-                </div>
-                <div class="entry-content">
-                    <strong>Motor Birleşimi 🛠️</strong>
-                    <p>Tüm oyun kodları (Snake, Tetris, Pacman) tek bir dosyada sorunsuz çalışacak şekilde birleştirildi.</p>
-                </div>
             </div>
-
-            <div class="timeline-item">
-                <div>
-                    <span class="version-tag">v2.5.0</span>
-                    <span class="entry-date">Geçen Hafta</span>
-                </div>
-                <div class="entry-content">
-                    <strong>Sinema Modu 🎬</strong>
-                    <ul>
-                        <li>Favori filmler için kart tasarımı yapıldı.</li>
-                        <li>Harry Potter ve Avengers eklendi.</li>
-                    </ul>
-                </div>
-            </div>
-
-             <div class="timeline-item">
-                <div>
-                    <span class="version-tag">v2.0.0</span>
-                    <span class="entry-date">Geçen Ay</span>
-                </div>
-                <div class="entry-content">
-                    <strong>Oyun Odası Açıldı 🎮</strong>
-                    <p>Siteye ilk kez interaktif oyunlar eklendi. Yılan oyunu ile başlangıç yapıldı.</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div>
-                    <span class="version-tag">v1.0.0</span>
-                    <span class="entry-date">Başlangıç</span>
-                </div>
-                <div class="entry-content">
-                    <strong>Merhaba Dünya! 🌍</strong>
-                    <p>Naz Duru'nun kişisel web sitesi yayına alındı. Baby blue ve pink tema renkleri seçildi.</p>
-                </div>
-            </div>
-        </div>
     </section>
 
     <section id="movies">
         <h2 style="text-align: center; color: var(--baby-pink);">🎬 Favori Filmlerim</h2>
         <div class="movie-grid">
             <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80">
+                <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80" alt="Avengers">
                 <div class="movie-info">
                     <h4>Avengers</h4>
-                    <p>Süper kahramanların dünyayı kurtarmak için güçlerini birleştirdiği aksiyon dolu macera.</p>
+                    <p>Kahramanların dünyayı kurtarmak için güçlerini birleştirdiği efsanevi macera.</p>
                 </div>
             </div>
             <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=500&q=80">
+                <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=500&q=80" alt="Spiderman">
                 <div class="movie-info">
                     <h4>Spider-Man</h4>
-                    <p>Peter Parker'ın örümcek güçlerini ve kahramanlık sorumluluğunu keşfetme hikayesi.</p>
+                    <p>Peter Parker'ın kahramanlık ve sorumluluk arasındaki dengesi.</p>
                 </div>
             </div>
             <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=500&q=80">
+                <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=500&q=80" alt="Harry Potter">
                 <div class="movie-info">
                     <h4>Harry Potter</h4>
-                    <p>Büyücülük dünyasına adım atan genç bir çocuğun cesaret ve dostluk dolu yılları.</p>
+                    <p>Sihir dünyasına adım atan genç bir büyücünün hikayesi.</p>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1500077423678-25eead48513a?auto=format&fit=crop&w=500&q=80" alt="Titanic">
+                <div class="movie-info">
+                    <h4>Titanic</h4>
+                    <p>Tarihin en büyük gemisinde yaşanan unutulmaz bir aşk hikayesi.</p>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=500&q=80" alt="Coco">
+                <div class="movie-info">
+                    <h4>Coco</h4>
+                    <p>Müzik tutkunu Miguel'in ölüler diyarındaki renkli macerası.</p>
                 </div>
             </div>
         </div>
@@ -219,7 +203,7 @@
 
     <section id="games">
         <div style="display:flex; gap:10px; justify-content:center; margin-bottom:20px;">
-            <button onclick="prepareGame('snake')" style="padding:15px; border-radius:15px; cursor:pointer; background:var(--baby-blue); color:white; border:none; font-weight:bold;">🐍 Yılan</button>
+            <button onclick="prepareGame('snake')" style="padding:15px; border-radius:15px; cursor:pointer; background:var(--baby-blue); color:white; border:none; font-weight:bold;">🐍 Neon Yılan</button>
             <button onclick="prepareGame('tetris')" style="padding:15px; border-radius:15px; cursor:pointer; background:var(--baby-pink); color:white; border:none; font-weight:bold;">🧱 Tetris</button>
             <button onclick="prepareGame('pacman')" style="padding:15px; border-radius:15px; cursor:pointer; background:#fab1a0; color:white; border:none; font-weight:bold;">🍕 Pacman</button>
         </div>
@@ -271,21 +255,21 @@
                 <p>${text}</p>
             </div>
         `;
-        // En başa ekle
         timeline.insertBefore(newEntry, timeline.firstChild);
         input.value = "";
     }
 
-    // --- OYUN MOTORLARI (AYNEN KORUNDU) ---
+    // --- OYUN YÖNETİMİ ---
     let activeGameType = "";
     let canvas = document.getElementById("gameCanvas");
     let ctx = canvas.getContext("2d");
     let gameLoop;
     let score = 0;
     
-    // Yılan ve Pacman için yönler
+    // Yılan ve Pacman değişkenleri
     let dir = {x: 20, y: 0};
     let nextDir = {x: 20, y: 0};
+    let snakeSpeed = 120; // Başlangıç hızı
 
     // Tetris Sabitleri
     const ROWS = 20, COLS = 10, SIZE = 25;
@@ -299,21 +283,28 @@
         stopGame();
     }
 
-    function stopGame() { clearInterval(gameLoop); document.getElementById('game-area').style.display = "none"; }
+    function stopGame() { 
+        clearTimeout(gameLoop); // setTimeout kullanacağımız için
+        clearInterval(gameLoop); 
+        document.getElementById('game-area').style.display = "none"; 
+    }
 
     function prepareGame(type) {
         stopGame();
         activeGameType = type;
         document.getElementById('game-area').style.display = "block";
         document.getElementById('tutorial-overlay').style.display = "flex";
-        document.getElementById('hold-panel').style.display = type === 'tetris' ? 'block' : 'none';
-        document.getElementById('tetris-stats').style.display = type === 'tetris' ? 'block' : 'none';
+        
+        // Tetris panellerini gizle/göster
+        const isTetris = type === 'tetris';
+        document.getElementById('hold-panel').style.display = isTetris ? 'block' : 'none';
+        document.getElementById('tetris-stats').style.display = isTetris ? 'block' : 'none';
         
         const title = document.getElementById('tut-title');
         const desc = document.getElementById('tut-desc');
-        if(type === 'snake') { title.innerText = "🐍 Yılan"; desc.innerText = "Ok tuşlarını kullan!"; }
-        else if(type === 'tetris') { title.innerText = "🧱 Tetris"; desc.innerText = "Oklar: Hareket/Döndür | Shift: Sakla"; }
-        else { title.innerText = "🍕 Pacman"; desc.innerText = "Noktaları topla, hayaletten kaç!"; }
+        if(type === 'snake') { title.innerText = "🐍 Neon Yılan"; desc.innerText = "Yemek yedikçe hızlanırsın!"; }
+        else if(type === 'tetris') { title.innerText = "🧱 Tetris"; desc.innerText = "Klasik blok yerleştirmece."; }
+        else { title.innerText = "🍕 Pacman"; desc.innerText = "Hayaletlerden kaç!"; }
     }
 
     function startGameNow() {
@@ -324,29 +315,65 @@
         else if(activeGameType === 'pacman') startPacman();
     }
 
-    // --- YILAN MOTORU ---
+    // --- YENİLENMİŞ YILAN MOTORU (HIZLANAN & NEON) ---
     function startSnake() {
         canvas.width = 400; canvas.height = 400;
-        let snake = [{x: 200, y: 200}, {x: 180, y: 200}];
+        let snake = [{x: 200, y: 200}, {x: 180, y: 200}, {x: 160, y: 200}];
         dir = {x: 20, y: 0}; nextDir = {x: 20, y: 0};
         let food = {x: 100, y: 100};
+        snakeSpeed = 120; // Hızı sıfırla
 
-        gameLoop = setInterval(() => {
+        function gameStep() {
             dir = nextDir;
             const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
-            if(head.x<0 || head.x>=400 || head.y<0 || head.y>=400 || snake.some(s=>s.x===head.x && s.y===head.y)) {
-                alert("Oyun Bitti!"); stopGame(); return;
-            }
-            snake.unshift(head);
-            if(head.x === food.x && head.y === food.y) {
-                score += 10; document.getElementById('scoreVal').innerText = score;
-                food = {x: Math.floor(Math.random()*20)*20, y: Math.floor(Math.random()*20)*20};
-            } else snake.pop();
 
-            ctx.fillStyle = "black"; ctx.fillRect(0,0,400,400);
-            ctx.fillStyle = "#89CFF0"; snake.forEach(s => ctx.fillRect(s.x, s.y, 18, 18));
-            ctx.fillStyle = "#F4C2C2"; ctx.fillRect(food.x, food.y, 18, 18);
-        }, 120);
+            // Çarpışma kontrolü
+            if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 || snake.some(s => s.x === head.x && s.y === head.y)) {
+                alert("Oyun Bitti! Skorun: " + score); stopGame(); return;
+            }
+
+            snake.unshift(head);
+
+            // Yemek yeme kontrolü
+            if(Math.abs(head.x - food.x) < 5 && Math.abs(head.y - food.y) < 5) {
+                score += 10; 
+                document.getElementById('scoreVal').innerText = score;
+                food = {x: Math.floor(Math.random()*19)*20, y: Math.floor(Math.random()*19)*20};
+                // Hızlanma (En fazla 50ms'ye düşer)
+                if(snakeSpeed > 50) snakeSpeed -= 2; 
+            } else {
+                snake.pop();
+            }
+
+            // Çizim
+            ctx.fillStyle = "#111"; // Koyu arka plan
+            ctx.fillRect(0,0,400,400);
+
+            // Neon Efekti
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "#89CFF0";
+
+            // Yılanı çiz
+            ctx.fillStyle = "#89CFF0";
+            snake.forEach((s, index) => {
+                // Baş kısmı biraz daha parlak olsun
+                ctx.fillStyle = index === 0 ? "#fff" : "#89CFF0";
+                ctx.fillRect(s.x, s.y, 18, 18);
+            });
+
+            // Yemeği çiz
+            ctx.shadowColor = "#ff7675";
+            ctx.fillStyle = "#ff7675";
+            ctx.beginPath();
+            ctx.arc(food.x + 10, food.y + 10, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Efekti sıfırla (Diğer oyunlar için)
+            ctx.shadowBlur = 0;
+
+            gameLoop = setTimeout(gameStep, snakeSpeed);
+        }
+        gameStep();
     }
 
     // --- TETRIS MOTORU ---
@@ -398,6 +425,9 @@
 
     function drawBlock(x, y, color) {
         ctx.fillStyle = color; ctx.fillRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
+        // Bloklara hafif iç gölge efekti
+        ctx.strokeStyle = "rgba(0,0,0,0.3)";
+        ctx.strokeRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
     }
 
     function drawSideCanvas(id, piece) {
