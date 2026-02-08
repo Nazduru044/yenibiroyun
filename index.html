@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Kişisel Portfolyo v1.5.0</title>
+    <title>Naz Duru | Kişisel Portfolyo v1.6.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -51,13 +51,13 @@
         .movie-info { padding: 10px; text-align: center; }
 
         /* Modal */
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
-        .modal-content { background: white; margin: 15% auto; padding: 25px; border-radius: 25px; width: 80%; max-width: 450px; text-align: center; position: relative; border: 5px solid var(--baby-blue); }
-        .close-btn { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; color: var(--baby-pink); }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
+        .modal-content { background: white; margin: 8% auto; padding: 30px; border-radius: 25px; width: 85%; max-width: 500px; text-align: center; position: relative; border: 5px solid var(--baby-blue); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        .close-btn { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: var(--baby-pink); }
 
         /* Oyunlar */
         .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
-        .game-card { background: white; padding: 20px; text-align: center; border-radius: 20px; cursor: pointer; border: 2px solid #f0f0f0; transition: 0.3s; }
+        .game-card { background: white; padding: 20px; text-align: center; border-radius: 20px; cursor: pointer; border: 2px solid #f0f0f0; transition: 0.3s; font-weight: 600; }
         .game-card:hover { border-color: var(--baby-blue); background: #f9ffff; }
         #game-area { background: #2d3436; padding: 20px; border-radius: 25px; display: none; text-align: center; margin-top: 20px; }
         canvas { background: #000; border-radius: 15px; border: 4px solid #3d4446; max-width: 100%; }
@@ -73,8 +73,8 @@
 <div id="movieModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h2 id="modalTitle" style="color: var(--baby-blue);"></h2>
-        <p id="modalDescription" style="color: #636e72; line-height: 1.6;"></p>
+        <h2 id="modalTitle" style="color: var(--baby-blue); margin-bottom: 15px;"></h2>
+        <p id="modalDescription" style="color: #444; line-height: 1.8; text-align: justify; font-size: 0.95rem;"></p>
     </div>
 </div>
 
@@ -88,7 +88,7 @@
         </ul>
     </nav>
     <div class="header-right">
-        <span class="version-badge" style="background:white; color:var(--baby-blue); padding:5px 10px; border-radius:15px; font-size:12px; font-weight:bold;">v1.5.0</span>
+        <span class="version-badge" style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v1.6.0</span>
     </div>
 </header>
 
@@ -96,24 +96,28 @@
     <section id="home" class="active">
         <div style="text-align: center; padding: 40px 0;">
             <h1 style="font-size: 3rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
-            <p>Pacman'deki hayaletlere dikkat et! Başarılar dilerim.</p>
+            <p>Yeni filmler ve uzun özetler eklendi! Oyunlarda skorunu yükseltmeyi unutma.</p>
         </div>
     </section>
 
     <section id="movies">
-        <h2 style="text-align: center; color: var(--baby-pink);">🎬 Film Koleksiyonum</h2>
+        <h2 style="text-align: center; color: var(--baby-pink);">🎬 Favori Filmlerim</h2>
         <div class="movie-grid">
-            <div class="movie-card" onclick="openModal('Avengers: Endgame', 'Thanos\'u durdurmak için kahramanların zamana karşı yarışı.')">
+            <div class="movie-card" onclick="openModal('Avengers: Endgame', 'Evrenin yarısını yok eden Thanos\'un ardından, hayatta kalan Yenilmezler bir araya gelerek son bir şans için her şeyi riske atarlar. Geçmişe giderek sonsuzluk taşlarını toplama planı yapan kahramanlarımız, sadece evreni kurtarmak için değil, kaybettikleri dostlarını geri getirmek için de epik bir mücadeleye girişirler. Bu film, Marvel Sinematik Evreni\'nin en büyük finalidir.')">
                 <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80" alt="Avengers">
                 <div class="movie-info"><h4>Avengers (Marvel)</h4></div>
             </div>
-            <div class="movie-card" onclick="openModal('Titanic', 'Dev bir gemide yeşeren imkansız aşk hikayesi.')">
+            <div class="movie-card" onclick="openModal('Spider-Man: No Way Home', 'Peter Parker\'ın kimliği tüm dünya tarafından öğrenilince, Peter bu durumu düzeltmesi için Doktor Strange\'den yardım ister. Ancak büyü ters gider ve çoklu evrenlerin kapıları açılır. Peter, sadece kendi dünyasını değil, diğer evrenlerden gelen efsanevi düşmanlarla da savaşmak zorunda kalır. Hem aksiyon dolu hem de oldukça duygusal bir büyüme hikayesidir.')">
+                <img src="https://m.media-amazon.com/images/M/MV5BMGZlNTY1ZWUtYTMzNC00ZGU0LWEwNjYtMTM2OWU2YTdmYzRjXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg" alt="SpiderMan">
+                <div class="movie-info"><h4>Spider-Man (Marvel)</h4></div>
+            </div>
+            <div class="movie-card" onclick="openModal('Titanic', '1912 yılında asla batmayacağı söylenen devasa yolcu gemisi Titanic\'te geçen unutulmaz bir aşk hikayesi. Zengin bir ailenin kızı olan Rose ile fakir bir ressam olan Jack, sosyal sınıfları hiçe sayarak birbirlerine aşık olurlar. Ancak geminin bir buz dağına çarpmasıyla bu romantik yolculuk, tarihin en büyük trajedilerinden birine dönüşür. Duygu dolu sahneleriyle bir sinema klasiğidir.')">
                 <img src="https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" alt="Titanic">
                 <div class="movie-info"><h4>Titanic</h4></div>
             </div>
-            <div class="movie-card" onclick="openModal('Interstellar', 'Yıldızlararası bir kurtarma operasyonu.')">
-                <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=500&q=80" alt="Interstellar">
-                <div class="movie-info"><h4>Interstellar</h4></div>
+            <div class="movie-card" onclick="openModal('Coco', 'Müziğin yasak olduğu bir ailede büyüyen genç Miguel, hayali olan ünlü bir müzisyen olma yolunda ilerlerken yanlışlıkla Ölüler Diyarı\'na geçer. Burada ailesinin gizemli geçmişini keşfeden Miguel, atalarının gerçek hikayesini öğrenmek ve yaşam ile ölüm arasındaki dengeyi korumak zorundadır. Renkli dünyası ve harika şarkılarıyla insanın kalbine dokunan bir animasyon harikasıdır.')">
+                <img src="https://m.media-amazon.com/images/M/MV5BYjQ5NjM0Y2YtNjZkNC00ZDhkLWJGNjItN2E5Njc1NzUzY2MwXkEyXkFqcGdeQXVyOTc5MDI5NjE@._V1_.jpg" alt="Coco">
+                <div class="movie-info"><h4>Coco</h4></div>
             </div>
         </div>
     </section>
@@ -121,19 +125,19 @@
     <section id="notes">
         <div class="note-box">
             <h2 style="color: var(--baby-pink);">Derslerine iyi çalış! ✍️✨</h2>
-            <p>Sen her şeyi başarabilirsin Naz Duru.</p>
+            <p>Başarıya giden yol sabır ve disiplinden geçer Naz Duru. Hedeflerini unutma!</p>
         </div>
     </section>
 
     <section id="games">
-        <h2 style="text-align: center;">🎮 Oyun Seç</h2>
+        <h2 style="text-align: center;">🎮 Oyun Seç ve Başla</h2>
         <div class="game-grid">
             <div class="game-card" onclick="startGame('snake')">🐍 Yılan</div>
             <div class="game-card" onclick="startGame('tetris')">🧱 Tetris</div>
-            <div class="game-card" onclick="startGame('pacman')">🍕 Pacman (Hayaletli!)</div>
+            <div class="game-card" onclick="startGame('pacman')">🍕 Pacman</div>
         </div>
         <div id="game-area">
-            <h3 id="game-title" style="color:white; margin-top:0;"></h3>
+            <h3 id="game-title" style="color:white;"></h3>
             <canvas id="gameCanvas"></canvas>
             <div id="scoreText" style="font-size: 22px; color: var(--baby-blue); margin-top: 10px; font-weight: bold;">Skor: 0</div>
         </div>
@@ -142,9 +146,10 @@
     <section id="logs">
         <h2>🛠️ Günlükler</h2>
         <table>
-            <thead><tr><th>Tarih</th><th>Versiyon</th><th>Detay</th></tr></thead>
+            <thead><tr><th>Tarih</th><th>Versiyon</th><th>Yenilik</th></tr></thead>
             <tbody>
-                <tr><td>10.02.2026</td><td>1.5.0</td><td>Pacman'e <b>Hayalet Düşman</b> eklendi!</td></tr>
+                <tr><td>10.02.2026</td><td>1.6.0</td><td>2 yeni film (Spider-Man & Coco) eklendi, özetler uzatıldı.</td></tr>
+                <tr><td>10.02.2026</td><td>1.5.0</td><td>Pacman'e hayalet eklendi.</td></tr>
             </tbody>
         </table>
     </section>
@@ -163,6 +168,7 @@
         document.getElementById('movieModal').style.display = "block";
     }
     function closeModal() { document.getElementById('movieModal').style.display = "none"; }
+    window.onclick = function(e) { if(e.target == document.getElementById('movieModal')) closeModal(); }
 
     let canvas = document.getElementById("gameCanvas");
     let ctx = canvas.getContext("2d");
@@ -173,8 +179,7 @@
     function stopGame() { clearInterval(gameLoop); document.getElementById('game-area').style.display = "none"; activeGame = ""; }
 
     function startGame(game) {
-        stopGame();
-        activeGame = game;
+        stopGame(); activeGame = game;
         document.getElementById('game-area').style.display = "block";
         score = 0; document.getElementById('scoreText').innerText = "Skor: 0";
         if(game === 'snake') initSnake();
@@ -182,82 +187,52 @@
         if(game === 'pacman') initPacman();
     }
 
-    // --- PACMAN (HAYALETLİ) ---
+    // --- PACMAN SİSTEMİ ---
     let pac, ghost, dots;
     function initPacman() {
         canvas.width = 400; canvas.height = 400;
-        document.getElementById('game-title').innerText = "Dikkat: Hayaletten Kaç!";
-        pac = {x: 200, y: 200, s: 15, dir: 'right'};
-        ghost = {x: 50, y: 50, s: 15, speed: 2};
-        dots = [];
-        for(let i=0; i<10; i++) dots.push({x: Math.random()*360+20, y: Math.random()*360+20});
+        document.getElementById('game-title').innerText = "Pacman: Hayaletten Kaç!";
+        pac = {x: 200, y: 200, s: 15}; ghost = {x: 50, y: 50, s: 15, speed: 2};
+        dots = []; for(let i=0; i<8; i++) dots.push({x: Math.random()*360+20, y: Math.random()*360+20});
         gameLoop = setInterval(drawPacman, 50);
     }
     function drawPacman() {
         ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
-        
-        // Hayalet Hareketi (Seni Takip Eder)
         if(ghost.x < pac.x) ghost.x += ghost.speed; else ghost.x -= ghost.speed;
         if(ghost.y < pac.y) ghost.y += ghost.speed; else ghost.y -= ghost.speed;
-
-        // Çarpışma Kontrolü (Hayalet)
-        if(Math.hypot(pac.x - ghost.x, pac.y - ghost.y) < 25) {
-            alert("Hayalet seni yakaladı Naz Duru! Skor: " + score);
-            startGame('pacman');
-        }
-
-        // Pacman Çizimi
-        ctx.fillStyle = "yellow"; ctx.beginPath();
-        ctx.arc(pac.x, pac.y, pac.s, 0.2*Math.PI, 1.8*Math.PI); ctx.lineTo(pac.x, pac.y); ctx.fill();
-
-        // Hayalet Çizimi
-        ctx.fillStyle = "red"; ctx.beginPath();
-        ctx.arc(ghost.x, ghost.y, ghost.s, 0, Math.PI*2); ctx.fill();
-        ctx.fillStyle = "white"; ctx.fillRect(ghost.x-5, ghost.y-5, 3, 3); ctx.fillRect(ghost.x+2, ghost.y-5, 3, 3);
-
-        // Noktalar
-        ctx.fillStyle = "white";
-        dots.forEach((d, i) => {
+        if(Math.hypot(pac.x - ghost.x, pac.y - ghost.y) < 25) { alert("Hayalet yakaladı! Skor: " + score); startGame('pacman'); }
+        ctx.fillStyle = "yellow"; ctx.beginPath(); ctx.arc(pac.x, pac.y, pac.s, 0.2*Math.PI, 1.8*Math.PI); ctx.lineTo(pac.x, pac.y); ctx.fill();
+        ctx.fillStyle = "red"; ctx.beginPath(); ctx.arc(ghost.x, ghost.y, ghost.s, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = "white"; dots.forEach((d, i) => {
             ctx.beginPath(); ctx.arc(d.x, d.y, 4, 0, Math.PI*2); ctx.fill();
-            if(Math.hypot(pac.x - d.x, pac.y - d.y) < 20) {
-                dots.splice(i, 1); score += 10;
-                document.getElementById('scoreText').innerText = "Skor: " + score;
-                dots.push({x: Math.random()*360+20, y: Math.random()*360+20});
-            }
+            if(Math.hypot(pac.x - d.x, pac.y - d.y) < 20) { dots.splice(i, 1); score += 10; document.getElementById('scoreText').innerText = "Skor: " + score; dots.push({x: Math.random()*360+20, y: Math.random()*360+20}); }
         });
     }
 
-    // --- YILAN ---
+    // --- YILAN SİSTEMİ ---
     let snake, food, dx, dy;
     function initSnake() {
-        canvas.width = 400; canvas.height = 400;
-        document.getElementById('game-title').innerText = "Yılan Oyunu";
-        dx = 20; dy = 0; snake = [{x: 160, y: 160}, {x: 140, y: 160}]; food = {x: 200, y: 200};
-        gameLoop = setInterval(drawSnake, 100);
-    }
-    function drawSnake() {
-        ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
-        const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-        snake.unshift(head);
-        if(head.x === food.x && head.y === food.y) {
-            score += 10; document.getElementById('scoreText').innerText = "Skor: " + score;
-            food = {x: Math.floor(Math.random()*19)*20, y: Math.floor(Math.random()*19)*20};
-        } else snake.pop();
-        if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400) startGame('snake');
-        ctx.fillStyle = "#89CFF0"; snake.forEach(s => ctx.fillRect(s.x, s.y, 18, 18));
-        ctx.fillStyle = "#F4C2C2"; ctx.fillRect(food.x, food.y, 18, 18);
+        canvas.width = 400; canvas.height = 400; dx = 20; dy = 0;
+        snake = [{x: 160, y: 160}, {x: 140, y: 160}]; food = {x: 200, y: 200};
+        gameLoop = setInterval(() => {
+            ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
+            const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+            snake.unshift(head);
+            if(head.x === food.x && head.y === food.y) { score += 10; document.getElementById('scoreText').innerText = "Skor: " + score; food = {x: Math.floor(Math.random()*19)*20, y: Math.floor(Math.random()*19)*20}; }
+            else snake.pop();
+            if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400) startGame('snake');
+            ctx.fillStyle = "var(--baby-blue)"; snake.forEach(s => ctx.fillRect(s.x, s.y, 18, 18));
+            ctx.fillStyle = "var(--baby-pink)"; ctx.fillRect(food.x, food.y, 18, 18);
+        }, 100);
     }
 
-    // --- TETRİS (Mini) ---
-    let t_pos;
+    // --- TETRİS SİSTEMİ ---
     function initTetris() {
-        canvas.width = 240; canvas.height = 400;
-        document.getElementById('game-title').innerText = "Tetris Modu";
-        t_pos = {x: 100, y: 0};
+        canvas.width = 240; canvas.height = 400; let t_pos = {x: 100, y: 0};
         gameLoop = setInterval(() => {
             ctx.fillStyle = "#000"; ctx.fillRect(0,0,240,400);
             t_pos.y += 5; if(t_pos.y > 380) { t_pos.y = 0; score += 20; document.getElementById('scoreText').innerText = "Skor: " + score; }
-            ctx.fillStyle = "#89CFF0"; ctx.fillRect(t_pos.x, t_pos.y, 40, 20);
+            ctx.fillStyle = "var(--baby-blue)"; ctx.fillRect(t_pos.x, t_pos.y, 40, 20);
         }, 50);
     }
 
@@ -269,10 +244,8 @@
             if(e.key === "ArrowRight" && dx === 0) { dx = 20; dy = 0; }
         }
         if(activeGame === 'pacman') {
-            if(e.key === "ArrowUp") pac.y -= 15;
-            if(e.key === "ArrowDown") pac.y += 15;
-            if(e.key === "ArrowLeft") pac.x -= 15;
-            if(e.key === "ArrowRight") pac.x += 15;
+            if(e.key === "ArrowUp") pac.y -= 15; if(e.key === "ArrowDown") pac.y += 15;
+            if(e.key === "ArrowLeft") pac.x -= 15; if(e.key === "ArrowRight") pac.x += 15;
         }
     });
 </script>
