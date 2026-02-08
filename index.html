@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v3.0.0</title>
+    <title>Naz Duru | Portfolyo v3.1.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -89,7 +89,6 @@
         /* --- FİLMLER --- */
         .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; transition: 0.3s; display: flex; flex-direction: column; }
-        .movie-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .movie-card img { width: 100%; height: 250px; object-fit: cover; }
         .movie-info { padding: 15px; text-align: left; }
         .movie-info h4 { margin: 0 0 8px 0; color: #333; font-size: 1.1rem; }
@@ -115,7 +114,7 @@
             <li><a onclick="showSection('movies')">🎬 Filmler</a></li>
         </ul>
     </nav>
-    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v3.0.0</span>
+    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v3.1.0</span>
 </header>
 
 <div class="container">
@@ -130,24 +129,18 @@
                 <div class="home-card" onclick="showSection('games')">
                     <div class="icon-circle" style="background: #e1f5fe; color: #03a9f4;">🎮</div>
                     <h3>Oyun Odası</h3>
-                    <p>Neon Yılan, Pro Tetris veya yenilenmiş Pacman motoruyla hemen oynamaya başla!</p>
+                    <p>Neon Yılan, Pro Tetris veya yenilenmiş Pacman motoruyla oyna!</p>
                 </div>
-
                 <div class="home-card" onclick="showSection('diary')">
                     <div class="icon-circle" style="background: #fce4ec; color: #f06292;">📝</div>
-                    <h3>Geliştirici Günlüğü</h3>
-                    <p>Projenin v1.0'dan bugüne nasıl geldiğini gör ve kendi notlarını ekle.</p>
+                    <h3>Günlük</h3>
+                    <p>Projeye eklenen yeni özellikleri ve notları incele.</p>
                 </div>
-
                 <div class="home-card" onclick="showSection('movies')">
                     <div class="icon-circle" style="background: #fff3e0; color: #ff9800;">🎬</div>
-                    <h3>Favori Filmler</h3>
-                    <p>Marvel evreninden klasik aşk hikayelerine kadar en sevdiğim film önerileri.</p>
+                    <h3>Filmler</h3>
+                    <p>En sevdiğim film önerileri ve özetleri burada.</p>
                 </div>
-            </div>
-
-            <div style="margin-top: 50px; padding: 20px; background: rgba(137, 207, 240, 0.1); border-radius: 20px;">
-                <p style="font-style: italic; color: #555;">"Kod yazmak bir yolculuktur, her güncelleme yeni bir macera!" 🚀</p>
             </div>
         </div>
     </section>
@@ -158,13 +151,16 @@
             <textarea id="newLogInput" placeholder="Bugün projeye ne ekledin?"></textarea><br>
             <button class="diary-btn" onclick="addNewLog()">Günlüğe İşle ✨</button>
         </div>
-
         <div class="timeline" id="timelineArea">
             <div class="timeline-item">
-                <div><span class="version-tag">v3.0.0</span><span class="entry-date">Bugün</span></div>
-                <div class="entry-content"><strong>Tam Arşiv & Dashboard 🌈</strong><p>Ana sayfa interaktif kartlarla yenilendi. Pacman motoru ve film arşivi stabilize edildi.</p></div>
+                <div><span class="version-tag">v3.1.0</span><span class="entry-date">Bugün</span></div>
+                <div class="entry-content"><strong>Pacman Fix 🍕</strong><p>Pacman motorundaki dönüş hataları ve duvar geçme sorunları giderildi.</p></div>
             </div>
+            <div class="timeline-item">
+                <div><span class="version-tag">v1.0.0</span><span class="entry-date">Başlangıç</span></div>
+                <div class="entry-content"><strong>Merhaba Dünya!</strong><p>Site yayına alındı.</p></div>
             </div>
+        </div>
     </section>
 
     <section id="movies">
@@ -172,15 +168,15 @@
         <div class="movie-grid">
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Avengers</h4><p>Kahramanların dünyayı kurtarmak için güçlerini birleştirdiği macera.</p></div>
+                <div class="movie-info"><h4>Avengers</h4><p>Kahramanların dünyayı kurtarma macerası.</p></div>
             </div>
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Spider-Man</h4><p>Peter Parker'ın kahramanlık ve sorumluluk hikayesi.</p></div>
+                <div class="movie-info"><h4>Spider-Man</h4><p>Peter Parker'ın sorumluluk hikayesi.</p></div>
             </div>
             <div class="movie-card">
                 <img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info"><h4>Harry Potter</h4><p>Sihir dünyasına adım atan genç bir büyücünün hikayesi.</p></div>
+                <div class="movie-info"><h4>Harry Potter</h4><p>Sihir dünyasına adım atan genç büyücü.</p></div>
             </div>
         </div>
     </section>
@@ -227,6 +223,7 @@
     let score = 0;
     let dir = {x: 20, y: 0};
     let nextDir = {x: 0, y: 0};
+    let currentDir = {x: 0, y: 0};
 
     function addNewLog() {
         const input = document.getElementById('newLogInput');
@@ -263,7 +260,7 @@
         
         const title = document.getElementById('tut-title');
         const desc = document.getElementById('tut-desc');
-        nextDir = {x:0, y:0};
+        nextDir = {x:0, y:0}; currentDir = {x:0, y:0};
 
         if(type === 'snake') { title.innerText = "🐍 Neon Yılan"; desc.innerText = "Ok tuşları ile yön ver!"; }
         else if(type === 'tetris') { title.innerText = "🧱 Tetris"; desc.innerText = "Blokları yerleştir!"; }
@@ -278,7 +275,7 @@
         else if(activeGameType === 'pacman') startPacman();
     }
 
-    // --- SNAKE MOTORU ---
+    // --- SNAKE ---
     function startSnake() {
         canvas.width = 400; canvas.height = 400;
         let snake = [{x: 200, y: 200}, {x: 180, y: 200}, {x: 160, y: 200}];
@@ -290,36 +287,30 @@
             dir = nextDir;
             const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
             if(head.x < 0 || head.x >= 400 || head.y < 0 || head.y >= 400 || snake.some(s => s.x === head.x && s.y === head.y)) {
-                alert("Oyun Bitti! Skor: " + score); stopGame(); return;
+                alert("Oyun Bitti!"); stopGame(); return;
             }
             snake.unshift(head);
             if(Math.abs(head.x-food.x)<5 && Math.abs(head.y-food.y)<5) {
                 score+=10; document.getElementById('scoreVal').innerText = score;
                 food = {x: Math.floor(Math.random()*19)*20, y: Math.floor(Math.random()*19)*20};
-                if(speed > 50) speed -= 2;
             } else { snake.pop(); }
             ctx.fillStyle = "#111"; ctx.fillRect(0,0,400,400);
-            ctx.shadowBlur = 10; ctx.shadowColor = "#89CFF0";
             snake.forEach((s, i) => { ctx.fillStyle = i===0?"#fff":"#89CFF0"; ctx.fillRect(s.x, s.y, 18, 18); });
-            ctx.shadowColor = "#ff7675"; ctx.fillStyle = "#ff7675";
-            ctx.beginPath(); ctx.arc(food.x+10, food.y+10, 8, 0, Math.PI*2); ctx.fill();
-            ctx.shadowBlur = 0;
+            ctx.fillStyle = "#ff7675"; ctx.beginPath(); ctx.arc(food.x+10, food.y+10, 8, 0, Math.PI*2); ctx.fill();
             gameLoop = setTimeout(step, speed);
         }
         step();
     }
 
-    // --- TETRIS MOTORU ---
+    // --- TETRIS ---
     const ROWS = 20, COLS = 10, SIZE = 25;
     let board, currentPiece, nextPiece, holdPiece, canHold;
     const SHAPES = { 'I': [[1,1,1,1]], 'J': [[1,0,0],[1,1,1]], 'L': [[0,0,1],[1,1,1]], 'O': [[1,1],[1,1]], 'S': [[0,1,1],[1,1,0]], 'T': [[0,1,0],[1,1,1]], 'Z': [[1,1,0],[0,1,1]] };
     const COLORS = { 'I': '#00f0f0', 'J': '#0000f0', 'L': '#f0a000', 'O': '#f0f000', 'S': '#00f000', 'T': '#a000f0', 'Z': '#f00000' };
-    
     function startTetris() {
         canvas.width = COLS * SIZE; canvas.height = ROWS * SIZE;
         board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
-        nextPiece = getRandomPiece(); holdPiece = null; canHold = true;
-        spawnPiece();
+        nextPiece = getRandomPiece(); spawnPiece();
         gameLoop = setInterval(() => {
             currentPiece.y++;
             if(collide()) { currentPiece.y--; lockPiece(); spawnPiece(); }
@@ -327,21 +318,18 @@
         }, 500);
     }
     function getRandomPiece() { const keys = Object.keys(SHAPES); const type = keys[Math.floor(Math.random()*keys.length)]; return { type, shape: SHAPES[type], color: COLORS[type], x: 3, y: 0 }; }
-    function spawnPiece() { currentPiece = nextPiece; nextPiece = getRandomPiece(); canHold = true; drawSide('nextCanvas', nextPiece); if(collide()) { alert("Oyun Bitti!"); stopGame(); } }
+    function spawnPiece() { currentPiece = nextPiece; nextPiece = getRandomPiece(); canHold = true; drawSide('nextCanvas', nextPiece); if(collide()) { alert("Bitti!"); stopGame(); } }
     function collide() { return currentPiece.shape.some((row, dy) => row.some((v, dx) => { let nx = currentPiece.x + dx, ny = currentPiece.y + dy; return v && (nx<0 || nx>=COLS || ny>=ROWS || (ny>=0 && board[ny][nx])); })); }
-    function lockPiece() { currentPiece.shape.forEach((row, dy) => row.forEach((v, dx) => { if(v) board[currentPiece.y+dy][currentPiece.x+dx] = currentPiece.color; })); for(let r=ROWS-1; r>=0; r--) { if(board[r].every(c => c !== 0)) { board.splice(r, 1); board.unshift(Array(COLS).fill(0)); score += 100; document.getElementById('scoreVal').innerText = score; r++; } } }
+    function lockPiece() { currentPiece.shape.forEach((row, dy) => row.forEach((v, dx) => { if(v) board[currentPiece.y+dy][currentPiece.x+dx] = currentPiece.color; })); for(let r=ROWS-1; r>=0; r--) { if(board[r].every(c => c !== 0)) { board.splice(r, 1); board.unshift(Array(COLS).fill(0)); score += 100; document.getElementById('scoreVal').innerText = score; } } }
     function renderTetris() { ctx.fillStyle = "black"; ctx.fillRect(0,0,canvas.width,canvas.height); board.forEach((r, ri) => r.forEach((c, ci) => { if(c) { ctx.fillStyle = c; ctx.fillRect(ci*SIZE, ri*SIZE, SIZE-1, SIZE-1); } })); currentPiece.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { ctx.fillStyle = currentPiece.color; ctx.fillRect((currentPiece.x+dx)*SIZE, (currentPiece.y+dy)*SIZE, SIZE-1, SIZE-1); } })); }
     function drawSide(id, p) { const c = document.getElementById(id).getContext('2d'); c.fillStyle = "#3d4446"; c.fillRect(0,0,80,80); p.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { c.fillStyle = p.color; c.fillRect(dx*15+20, dy*15+20, 14, 14); } })); }
 
-    // --- PACMAN MOTORU (YENİLENMİŞ) ---
+    // --- PACMAN ---
     function startPacman() {
         canvas.width = 400; canvas.height = 400;
         const ts = 20; 
-        let p = { x: 1, y: 1 };
-        let ghost = { x: 18, y: 18 };
-        let pPix = { x: 20, y: 20 };
-        let gPix = { x: 360, y: 360 };
-        
+        let p = { x: 1, y: 1 }, ghost = { x: 18, y: 18 };
+        let pPix = { x: 20, y: 20 }, gPix = { x: 360, y: 360 };
         const map = [
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
@@ -364,61 +352,39 @@
             [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
         ];
-
-        let dots = []; 
-        for(let r=0; r<20; r++) for(let c=0; c<20; c++) if(map[r][c] === 0) dots.push({r, c});
-
+        let dots = []; for(let r=0;r<20;r++) for(let c=0;c<20;c++) if(map[r][c]===0) dots.push({r,c});
         let lastTick = 0;
-        const tickRate = 160; 
-
         function gameStep(timestamp) {
             if (!lastTick) lastTick = timestamp;
-            if (timestamp - lastTick > tickRate) {
-                // Pacman Hareketi
-                let nX = p.x + nextDir.x;
-                let nY = p.y + nextDir.y;
+            if (timestamp - lastTick > 180) {
+                if(map[p.y + nextDir.y] && map[p.y + nextDir.y][p.x + nextDir.x] === 0) currentDir = {...nextDir};
+                let nX = p.x + currentDir.x, nY = p.y + currentDir.y;
                 if(map[nY] && map[nY][nX] === 0) { p.x = nX; p.y = nY; }
-
-                // Hayalet Hareketi
-                if(Math.random() > 0.4){
+                if(Math.random() > 0.3){
                     let dx = p.x - ghost.x, dy = p.y - ghost.y;
-                    if(Math.abs(dx) > Math.abs(dy)) {
-                        let sx = dx > 0 ? 1 : -1;
-                        if(map[ghost.y][ghost.x+sx] === 0) ghost.x += sx;
-                    } else {
-                        let sy = dy > 0 ? 1 : -1;
-                        if(map[ghost.y+sy][ghost.x] === 0) ghost.y += sy;
-                    }
+                    if(Math.abs(dx) > Math.abs(dy)) { let sx = dx > 0 ? 1 : -1; if(map[ghost.y][ghost.x+sx] === 0) ghost.x += sx; }
+                    else { let sy = dy > 0 ? 1 : -1; if(map[ghost.y+sy][ghost.x] === 0) ghost.y += sy; }
                 }
-
-                dots = dots.filter(d => { 
-                    if(d.r === p.y && d.c === p.x){ score += 10; document.getElementById('scoreVal').innerText = score; return false; } 
-                    return true; 
-                });
+                dots = dots.filter(d => { if(d.r === p.y && d.c === p.x){ score += 10; document.getElementById('scoreVal').innerText = score; return false; } return true; });
                 lastTick = timestamp;
             }
-
-            pPix.x += (p.x * ts - pPix.x) * 0.15;
-            pPix.y += (p.y * ts - pPix.y) * 0.15;
-            gPix.x += (ghost.x * ts - gPix.x) * 0.1;
-            gPix.y += (ghost.y * ts - gPix.y) * 0.1;
-
-            if(Math.abs(pPix.x - gPix.x) < 15 && Math.abs(pPix.y - gPix.y) < 15){ alert("Yakalandın!"); stopGame(); return; }
-
+            pPix.x += (p.x * ts - pPix.x) * 0.2; pPix.y += (p.y * ts - pPix.y) * 0.2;
+            gPix.x += (ghost.x * ts - gPix.x) * 0.12; gPix.y += (ghost.y * ts - gPix.y) * 0.12;
+            if(Math.abs(pPix.x - gPix.x) < 14 && Math.abs(pPix.y - gPix.y) < 14){ alert("Bitti!"); stopGame(); return; }
             ctx.fillStyle = "#111"; ctx.fillRect(0, 0, 400, 400);
             for(let r=0; r<20; r++) for(let c=0; c<20; c++) if(map[r][c] === 1) { ctx.fillStyle = "#34495e"; ctx.fillRect(c * ts, r * ts, ts - 1, ts - 1); }
             ctx.fillStyle = "#ff7675"; dots.forEach(d => { ctx.beginPath(); ctx.arc(d.c * ts + 10, d.r * ts + 10, 2, 0, Math.PI * 2); ctx.fill(); });
             ctx.fillStyle = "#e74c3c"; ctx.fillRect(gPix.x + 2, gPix.y + 2, 16, 16);
             ctx.fillStyle = "#f1c40f"; ctx.beginPath();
             let open = (Math.floor(timestamp / 200) % 2 === 0) ? 0.2 : 0.05;
-            ctx.arc(pPix.x + 10, pPix.y + 10, 8, open * Math.PI, (2 - open) * Math.PI);
+            ctx.arc(pPix.x + 10, pPix.y + 10, 9, open * Math.PI, (2 - open) * Math.PI);
             ctx.lineTo(pPix.x + 10, pPix.y + 10); ctx.fill();
-
             gameLoop = requestAnimationFrame(gameStep);
         }
         gameLoop = requestAnimationFrame(gameStep);
     }
 
+    // KEYBOARD
     window.addEventListener("keydown", e => {
         if(activeGameType === 'snake'){
             if(e.key === "ArrowUp" && dir.y === 0) nextDir = {x:0, y:-20};
@@ -435,7 +401,6 @@
             if(e.key === "ArrowRight") { currentPiece.x++; if(collide()) currentPiece.x--; }
             if(e.key === "ArrowDown") { currentPiece.y++; if(collide()) currentPiece.y--; }
             if(e.key === "ArrowUp") { const old = currentPiece.shape; currentPiece.shape = currentPiece.shape[0].map((_, i) => currentPiece.shape.map(row => row[i]).reverse()); if(collide()) currentPiece.shape = old; }
-            if(e.key === "Shift" && canHold) { if(!holdPiece){ holdPiece = currentPiece; spawnPiece(); } else { let t = currentPiece; currentPiece = holdPiece; holdPiece = t; currentPiece.x=3; currentPiece.y=0; } canHold = false; drawSide('holdCanvas', holdPiece); }
             renderTetris();
         }
     });
