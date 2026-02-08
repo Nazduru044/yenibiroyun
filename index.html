@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v2.8.5</title>
+    <title>Naz Duru | Portfolyo v2.9.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,6 +11,7 @@
             --baby-pink: #F4C2C2;
             --primary-gradient: linear-gradient(135deg, #89CFF0 0%, #F4C2C2 100%);
             --glass-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #2d3436;
         }
 
         body {
@@ -19,6 +20,7 @@
             background: #fdfeff;
             background-image: radial-gradient(var(--baby-pink) 0.5px, transparent 0.5px);
             background-size: 30px 30px;
+            color: var(--text-dark);
         }
 
         header {
@@ -40,6 +42,44 @@
         section { display: none; animation: fadeIn 0.5s ease; }
         section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- GÜNLÜK / ZAMAN TÜNELİ TASARIMI --- */
+        .diary-input {
+            background: #f8f9fa; padding: 20px; border-radius: 20px; margin-bottom: 30px;
+            border: 2px dashed var(--baby-blue); text-align: center;
+        }
+        .diary-input textarea {
+            width: 90%; height: 60px; border-radius: 10px; border: 1px solid #ddd; padding: 10px;
+            font-family: inherit; resize: none; margin-bottom: 10px;
+        }
+        .diary-btn {
+            background: var(--baby-blue); color: white; border: none; padding: 8px 25px; 
+            border-radius: 15px; cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
+        .diary-btn:hover { transform: scale(1.05); }
+
+        .timeline {
+            border-left: 3px solid var(--baby-pink);
+            margin-left: 20px; padding-left: 30px; position: relative;
+        }
+        .timeline-item {
+            position: relative; margin-bottom: 30px;
+        }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -39px; top: 5px;
+            width: 15px; height: 15px; background: var(--baby-blue);
+            border-radius: 50%; border: 3px solid white; box-shadow: 0 0 0 2px var(--baby-pink);
+        }
+        .version-tag {
+            background: var(--baby-blue); color: white; padding: 2px 10px; 
+            border-radius: 10px; font-size: 0.8rem; font-weight: bold; margin-right: 10px;
+        }
+        .entry-date { color: #999; font-size: 0.85rem; }
+        .entry-content { 
+            background: white; padding: 15px; border-radius: 15px; margin-top: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03); border: 1px solid #eee;
+        }
+        .entry-content ul { padding-left: 20px; margin: 5px 0; }
 
         /* Film Kartları */
         .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
@@ -70,14 +110,83 @@
             <li><a onclick="showSection('movies')">🎬 Filmler</a></li>
         </ul>
     </nav>
-    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.8.5</span>
+    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.9.0</span>
 </header>
 
 <div class="container">
     <section id="home" class="active">
         <div style="text-align: center; padding: 40px 0;">
             <h1 style="font-size: 3rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
-            <p>Her şey tam kapasite! Oyunlar, özetler ve eğlence burada.</p>
+            <p>Portfolyo, Oyunlar ve Geliştirici Günlüğü bir arada!</p>
+        </div>
+    </section>
+
+    <section id="diary">
+        <h2 style="text-align: center; color: var(--baby-pink);">📝 Geliştirici Günlüğü</h2>
+        
+        <div class="diary-input">
+            <textarea id="newLogInput" placeholder="Bugün projeye ne ekledin?"></textarea><br>
+            <button class="diary-btn" onclick="addNewLog()">Günlüğe İşle ✨</button>
+        </div>
+
+        <div class="timeline" id="timelineArea">
+            <div class="timeline-item">
+                <div>
+                    <span class="version-tag">v2.9.0</span>
+                    <span class="entry-date">Bugün</span>
+                </div>
+                <div class="entry-content">
+                    <strong>Günlük Sistemi Eklendi! 📔</strong>
+                    <p>Artık yapılan tüm değişiklikler tarih sırasına göre burada listeleniyor.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div>
+                    <span class="version-tag">v2.8.5</span>
+                    <span class="entry-date">Dün</span>
+                </div>
+                <div class="entry-content">
+                    <strong>Motor Birleşimi 🛠️</strong>
+                    <p>Tüm oyun kodları (Snake, Tetris, Pacman) tek bir dosyada sorunsuz çalışacak şekilde birleştirildi.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div>
+                    <span class="version-tag">v2.5.0</span>
+                    <span class="entry-date">Geçen Hafta</span>
+                </div>
+                <div class="entry-content">
+                    <strong>Sinema Modu 🎬</strong>
+                    <ul>
+                        <li>Favori filmler için kart tasarımı yapıldı.</li>
+                        <li>Harry Potter ve Avengers eklendi.</li>
+                    </ul>
+                </div>
+            </div>
+
+             <div class="timeline-item">
+                <div>
+                    <span class="version-tag">v2.0.0</span>
+                    <span class="entry-date">Geçen Ay</span>
+                </div>
+                <div class="entry-content">
+                    <strong>Oyun Odası Açıldı 🎮</strong>
+                    <p>Siteye ilk kez interaktif oyunlar eklendi. Yılan oyunu ile başlangıç yapıldı.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div>
+                    <span class="version-tag">v1.0.0</span>
+                    <span class="entry-date">Başlangıç</span>
+                </div>
+                <div class="entry-content">
+                    <strong>Merhaba Dünya! 🌍</strong>
+                    <p>Naz Duru'nun kişisel web sitesi yayına alındı. Baby blue ve pink tema renkleri seçildi.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -96,20 +205,6 @@
                 <div class="movie-info">
                     <h4>Spider-Man</h4>
                     <p>Peter Parker'ın örümcek güçlerini ve kahramanlık sorumluluğunu keşfetme hikayesi.</p>
-                </div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1500077423678-25eead48513a?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info">
-                    <h4>Titanic</h4>
-                    <p>Lüks bir gemide filizlenen ama trajediyle biten tarihin en büyük aşk hikayesi.</p>
-                </div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=500&q=80">
-                <div class="movie-info">
-                    <h4>Coco</h4>
-                    <p>Miguel'in ölüler diyarında müzik ve ailesinin gizemini keşfettiği renkli yolculuk.</p>
                 </div>
             </div>
             <div class="movie-card">
@@ -154,14 +249,34 @@
             </div>
         </div>
     </section>
-
-    <section id="diary">
-        <h2 style="text-align: center;">📝 Günlük</h2>
-        <p><b>v2.8.5:</b> Tüm oyun motorları ve film özetleri eksiksiz birleştirildi.</p>
-    </section>
 </div>
 
 <script>
+    // --- GÜNLÜK FONKSİYONU ---
+    function addNewLog() {
+        const input = document.getElementById('newLogInput');
+        const text = input.value;
+        if(text.trim() === "") return;
+
+        const timeline = document.getElementById('timelineArea');
+        const newEntry = document.createElement('div');
+        newEntry.className = 'timeline-item';
+        newEntry.innerHTML = `
+            <div>
+                <span class="version-tag" style="background:#fab1a0;">Yeni</span>
+                <span class="entry-date">Şimdi</span>
+            </div>
+            <div class="entry-content">
+                <strong>Güncelleme</strong>
+                <p>${text}</p>
+            </div>
+        `;
+        // En başa ekle
+        timeline.insertBefore(newEntry, timeline.firstChild);
+        input.value = "";
+    }
+
+    // --- OYUN MOTORLARI (AYNEN KORUNDU) ---
     let activeGameType = "";
     let canvas = document.getElementById("gameCanvas");
     let ctx = canvas.getContext("2d");
@@ -316,7 +431,6 @@
             ctx.fillStyle = "red"; ctx.fillRect(ghost.x, ghost.y, 20, 20);
             ctx.fillStyle = "yellow"; ctx.beginPath(); ctx.arc(p.x, p.y, 15, 0.2*Math.PI, 1.8*Math.PI); ctx.lineTo(p.x, p.y); ctx.fill();
             
-            // Pacman hareketi
             if(nextDir.x !== 0 || nextDir.y !== 0) {
                 p.x = Math.max(15, Math.min(385, p.x + nextDir.x / 5));
                 p.y = Math.max(15, Math.min(385, p.y + nextDir.y / 5));
