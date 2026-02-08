@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v2.5.0</title>
+    <title>Naz Duru | Portfolyo v2.7.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -41,34 +41,14 @@
         section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Gelişmiş Tetris Layout */
         #game-area { 
             background: #2d3436; padding: 20px; border-radius: 25px; 
             display: none; text-align: center; margin-top: 20px; position: relative;
         }
         
-        .tetris-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            align-items: flex-start;
-        }
-
-        .side-panel {
-            background: #3d4446;
-            padding: 15px;
-            border-radius: 15px;
-            color: white;
-            min-width: 100px;
-            border: 2px solid #555;
-        }
-
-        canvas { 
-            background: #000; 
-            border-radius: 10px; 
-            border: 4px solid #3d4446; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
+        .tetris-wrapper { display: flex; justify-content: center; gap: 20px; align-items: flex-start; }
+        .side-panel { background: #3d4446; padding: 15px; border-radius: 15px; color: white; min-width: 100px; border: 2px solid #555; }
+        canvas { background: #000; border-radius: 10px; border: 4px solid #3d4446; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
 
         #tutorial-overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
@@ -80,10 +60,10 @@
         .diary-entry { border-bottom: 1px solid #eee; padding: 15px 0; }
         .version-tag { background: var(--baby-blue); color: white; padding: 3px 10px; border-radius: 10px; font-size: 0.8rem; font-weight: bold; margin-right: 10px; }
 
-        /* Filmler */
         .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; cursor: pointer; transition: 0.3s; }
+        .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; cursor: pointer; transition: 0.3s; text-align: center; }
         .movie-card img { width: 100%; height: 280px; object-fit: cover; }
+        .movie-card h4 { margin: 10px 0; color: #333; }
         
         .skip-btn { background: var(--baby-pink); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; }
     </style>
@@ -99,14 +79,14 @@
             <li><a onclick="showSection('movies')">🎬 Filmler</a></li>
         </ul>
     </nav>
-    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.5.0</span>
+    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v2.7.0</span>
 </header>
 
 <div class="container">
     <section id="home" class="active">
         <div style="text-align: center; padding: 40px 0;">
             <h1 style="font-size: 3rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
-            <p>Profesyonel Tetris güncellemesi yayında!</p>
+            <p>Tüm oyunlar tamir edildi ve yeni filmler eklendi!</p>
         </div>
     </section>
 
@@ -114,13 +94,14 @@
         <h2 style="text-align: center; color: var(--baby-blue);">📝 Güncelleme Günlüğü</h2>
         <div class="diary-box">
             <div class="diary-entry">
-                <div><span class="version-tag">v2.5.0</span><span style="font-weight:bold;">08.02.2026</span></div>
-                <p>• Tetris'e "Hold" (Sakla) ve "Next" (Sıradaki) teknik özellikleri eklendi.<br>
-                   • Blok görselleri ve puanlama sistemi modernize edildi.</p>
+                <div><span class="version-tag">v2.7.0</span><span style="font-weight:bold;">08.02.2026</span></div>
+                <p>• <b>Snake:</b> Yön kontrolleri ve çarpma mantığı düzeltildi.<br>
+                   • <b>Pacman:</b> Yeni oyun motoru ve hayalet yapay zekası eklendi.<br>
+                   • <b>Movies:</b> Eksik olan Spider-Man ve Harry Potter filmleri eklendi.</p>
             </div>
             <div class="diary-entry">
-                <div><span class="version-tag">v2.4.0</span><span>08.02.2026</span></div>
-                <p>• Oyunlara rehber ekranı ve Atla düğmesi eklendi.</p>
+                <div><span class="version-tag">v2.5.0</span><span>08.02.2026</span></div>
+                <p>• Tetris'e "Hold" ve "Next" özellikleri eklendi.</p>
             </div>
         </div>
     </section>
@@ -129,8 +110,10 @@
         <h2 style="text-align: center; color: var(--baby-pink);">🎬 Favori Filmlerim</h2>
         <div class="movie-grid">
             <div class="movie-card"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=500&q=80"><h4>Avengers</h4></div>
+            <div class="movie-card"><img src="https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=500&q=80"><h4>Spider-Man</h4></div>
             <div class="movie-card"><img src="https://images.unsplash.com/photo-1500077423678-25eead48513a?auto=format&fit=crop&w=500&q=80"><h4>Titanic</h4></div>
             <div class="movie-card"><img src="https://images.unsplash.com/photo-1518929458119-e5bf444c30f4?auto=format&fit=crop&w=500&q=80"><h4>Coco</h4></div>
+            <div class="movie-card"><img src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?auto=format&fit=crop&w=500&q=80"><h4>Harry Potter</h4></div>
         </div>
     </section>
 
@@ -159,12 +142,13 @@
                     <canvas id="gameCanvas"></canvas>
                 </div>
 
-                <div class="side-panel" id="stats-panel" style="display:none;">
-                    <h4>NEXT</h4>
-                    <canvas id="nextCanvas" width="80" height="80"></canvas>
-                    <hr>
+                <div class="side-panel" id="stats-panel">
+                    <h4>PUAN</h4>
                     <p>Skor: <span id="scoreVal">0</span></p>
-                    <p>Satır: <span id="lineVal">0</span></p>
+                    <div id="tetris-only-stats" style="display:none;">
+                        <canvas id="nextCanvas" width="80" height="80"></canvas>
+                        <p>Satır: <span id="lineVal">0</span></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,6 +161,7 @@
     let ctx = canvas.getContext("2d");
     let gameLoop;
     let score = 0, lines = 0;
+    let snakeDir = {x: 20, y: 0};
 
     function showSection(id) {
         document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
@@ -190,19 +175,21 @@
         document.getElementById('game-area').style.display = "block";
         document.getElementById('tutorial-overlay').style.display = "flex";
         
-        // Yan panelleri sadece Tetris'te göster
         document.getElementById('hold-panel').style.display = type === 'tetris' ? 'block' : 'none';
-        document.getElementById('stats-panel').style.display = type === 'tetris' ? 'block' : 'none';
+        document.getElementById('tetris-only-stats').style.display = type === 'tetris' ? 'block' : 'none';
 
         const title = document.getElementById('tut-title');
         const desc = document.getElementById('tut-desc');
 
         if(type === 'tetris') {
             title.innerText = "🧱 Pro Tetris Modu";
-            desc.innerText = "Ok Tuşları: Hareket | Yukarı Ok: Döndür | Shift: Parça Sakla (Hold)";
+            desc.innerText = "Ok Tuşları: Hareket | Yukarı: Döndür | Shift: Sakla";
+        } else if(type === 'snake') {
+            title.innerText = "🐍 Yılan Oyunu";
+            desc.innerText = "Ok Tuşları ile yılanı yönet, elmaları ye!";
         } else {
-            title.innerText = "Oyun Başlıyor";
-            desc.innerText = "Hazır mısın?";
+            title.innerText = "🍕 Pacman Modu";
+            desc.innerText = "Ok Tuşları ile noktaları topla, hayaletten kaç!";
         }
     }
 
@@ -218,29 +205,92 @@
         updateUI();
         if(game === 'snake') startSnake();
         if(game === 'tetris') startTetris();
+        if(game === 'pacman') startPacman();
     }
 
     function updateUI() {
-        if(document.getElementById('scoreVal')) document.getElementById('scoreVal').innerText = score;
+        document.getElementById('scoreVal').innerText = score;
         if(document.getElementById('lineVal')) document.getElementById('lineVal').innerText = lines;
     }
 
-    // --- PROFESYONEL TETRIS MOTORU ---
+    // --- YILAN OYUNU (TAMİR EDİLDİ) ---
+    function startSnake() {
+        canvas.width = 400; canvas.height = 400;
+        let s = [{x:200, y:200}, {x:180, y:200}];
+        snakeDir = {x: 20, y: 0};
+        let f = {x:100, y:100};
+        
+        gameLoop = setInterval(() => {
+            ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
+            let head = {x: s[0].x + snakeDir.x, y: s[0].y + snakeDir.y};
+            
+            if(head.x<0 || head.x>=400 || head.y<0 || head.y>=400 || s.some(p=>p.x===head.x && p.y===head.y)) {
+                alert("Oyun Bitti! Skor: " + score); stopGame(); return;
+            }
+
+            s.unshift(head);
+            if(head.x === f.x && head.y === f.y) {
+                score += 10; updateUI();
+                f = {x: Math.floor(Math.random()*19)*20, y: Math.floor(Math.random()*19)*20};
+            } else { s.pop(); }
+
+            ctx.fillStyle = "var(--baby-blue)"; s.forEach(p => ctx.fillRect(p.x, p.y, 18, 18));
+            ctx.fillStyle = "var(--baby-pink)"; ctx.fillRect(f.x, f.y, 18, 18);
+        }, 150);
+    }
+
+    // --- PACMAN (YENİ EKLENDİ) ---
+    function startPacman() {
+        canvas.width = 400; canvas.height = 400;
+        let p = {x: 200, y: 200};
+        let dots = [];
+        for(let i=0; i<20; i++) dots.push({x: Math.random()*380, y: Math.random()*380});
+        let ghost = {x: 0, y: 0};
+
+        gameLoop = setInterval(() => {
+            ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
+            
+            // Hayalet Takibi
+            if(ghost.x < p.x) ghost.x += 1; else ghost.x -= 1;
+            if(ghost.y < p.y) ghost.y += 1; else ghost.y -= 1;
+
+            // Çarpışma
+            if(Math.abs(p.x - ghost.x) < 15 && Math.abs(p.y - ghost.y) < 15) {
+                alert("Hayalet Seni Yakaladı!"); stopGame(); return;
+            }
+
+            // Nokta Toplama
+            dots = dots.filter(d => {
+                if(Math.abs(p.x - d.x) < 15 && Math.abs(p.y - d.y) < 15) {
+                    score += 5; updateUI(); return false;
+                }
+                return true;
+            });
+            if(dots.length === 0) { alert("Tebrikler!"); stopGame(); }
+
+            ctx.fillStyle = "yellow"; ctx.beginPath(); ctx.arc(p.x, p.y, 15, 0.2 * Math.PI, 1.8 * Math.PI); ctx.lineTo(p.x, p.y); ctx.fill();
+            ctx.fillStyle = "red"; ctx.fillRect(ghost.x, ghost.y, 20, 20);
+            ctx.fillStyle = "white"; dots.forEach(d => ctx.fillRect(d.x, d.y, 4, 4));
+        }, 30);
+
+        window.onkeydown = (e) => {
+            if(e.key === "ArrowLeft") p.x -= 10;
+            if(e.key === "ArrowRight") p.x += 10;
+            if(e.key === "ArrowUp") p.y -= 10;
+            if(e.key === "ArrowDown") p.y += 10;
+        };
+    }
+
+    // --- TETRIS (MEVCUT KODLARIN) ---
     const ROWS = 20, COLS = 10, SIZE = 25;
     let board, currentPiece, nextPiece, holdPiece, canHold;
-
-    const SHAPES = {
-        'I': [[1,1,1,1]], 'J': [[1,0,0],[1,1,1]], 'L': [[0,0,1],[1,1,1]],
-        'O': [[1,1],[1,1]], 'S': [[0,1,1],[1,1,0]], 'T': [[0,1,0],[1,1,1]], 'Z': [[1,1,0],[0,1,1]]
-    };
+    const SHAPES = { 'I': [[1,1,1,1]], 'J': [[1,0,0],[1,1,1]], 'L': [[0,0,1],[1,1,1]], 'O': [[1,1],[1,1]], 'S': [[0,1,1],[1,1,0]], 'T': [[0,1,0],[1,1,1]], 'Z': [[1,1,0],[0,1,1]] };
     const COLORS = { 'I': '#00f0f0', 'J': '#0000f0', 'L': '#f0a000', 'O': '#f0f000', 'S': '#00f000', 'T': '#a000f0', 'Z': '#f00000' };
 
     function startTetris() {
         canvas.width = COLS * SIZE; canvas.height = ROWS * SIZE;
         board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
-        nextPiece = getRandomPiece();
-        holdPiece = null;
-        canHold = true;
+        nextPiece = getRandomPiece(); holdPiece = null; canHold = true;
         spawnPiece();
         gameLoop = setInterval(updateTetris, 500);
     }
@@ -252,11 +302,8 @@
     }
 
     function spawnPiece() {
-        currentPiece = nextPiece;
-        nextPiece = getRandomPiece();
-        canHold = true;
-        drawNext();
-        if (collide()) { alert("Oyun Bitti!"); stopGame(); }
+        currentPiece = nextPiece; nextPiece = getRandomPiece(); canHold = true;
+        drawNext(); if (collide()) { alert("Oyun Bitti!"); stopGame(); }
     }
 
     function collide() {
@@ -268,11 +315,7 @@
 
     function updateTetris() {
         currentPiece.y++;
-        if (collide()) {
-            currentPiece.y--;
-            lockAndClear();
-            spawnPiece();
-        }
+        if (collide()) { currentPiece.y--; lockAndClear(); spawnPiece(); }
         renderTetris();
     }
 
@@ -282,11 +325,7 @@
         }));
         let cleared = 0;
         for(let r = ROWS-1; r>=0; r--) {
-            if(board[r].every(c => c !== 0)) {
-                board.splice(r, 1);
-                board.unshift(Array(COLS).fill(0));
-                cleared++; r++;
-            }
+            if(board[r].every(c => c !== 0)) { board.splice(r, 1); board.unshift(Array(COLS).fill(0)); cleared++; r++; }
         }
         if(cleared) { score += cleared * 100; lines += cleared; updateUI(); }
     }
@@ -300,36 +339,22 @@
     }
 
     function drawBlock(targetCtx, x, y, color) {
-        targetCtx.fillStyle = color;
-        targetCtx.fillRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
-        // Parlama efekti (Teknik özellik)
-        targetCtx.strokeStyle = "rgba(255,255,255,0.5)";
-        targetCtx.strokeRect(x*SIZE+2, y*SIZE+2, SIZE-5, SIZE-5);
+        targetCtx.fillStyle = color; targetCtx.fillRect(x*SIZE, y*SIZE, SIZE-1, SIZE-1);
+        targetCtx.strokeStyle = "rgba(255,255,255,0.5)"; targetCtx.strokeRect(x*SIZE+2, y*SIZE+2, SIZE-5, SIZE-5);
     }
 
     function drawNext() {
         const nCtx = document.getElementById('nextCanvas').getContext('2d');
         nCtx.fillStyle = "#3d4446"; nCtx.fillRect(0,0,80,80);
         nextPiece.shape.forEach((r, dy) => r.forEach((v, dx) => {
-            if(v) {
-                nCtx.fillStyle = nextPiece.color;
-                nCtx.fillRect(dx*15+20, dy*15+20, 14, 14);
-            }
+            if(v) { nCtx.fillStyle = nextPiece.color; nCtx.fillRect(dx*15+20, dy*15+20, 14, 14); }
         }));
     }
 
     function handleHold() {
         if(!canHold) return;
-        if(!holdPiece) {
-            holdPiece = currentPiece;
-            spawnPiece();
-        } else {
-            let temp = currentPiece;
-            currentPiece = holdPiece;
-            holdPiece = temp;
-            currentPiece.x = 3; currentPiece.y = 0;
-        }
-        holdPiece.x = 3; holdPiece.y = 0;
+        if(!holdPiece) { holdPiece = currentPiece; spawnPiece(); } 
+        else { let temp = currentPiece; currentPiece = holdPiece; holdPiece = temp; currentPiece.x = 3; currentPiece.y = 0; }
         canHold = false;
         const hCtx = document.getElementById('holdCanvas').getContext('2d');
         hCtx.fillStyle = "#3d4446"; hCtx.fillRect(0,0,80,80);
@@ -350,23 +375,13 @@
                 if(collide()) currentPiece.shape = prev;
             }
             renderTetris();
+        } else if(activeGameType === 'snake') {
+            if(e.key === "ArrowUp" && snakeDir.y === 0) snakeDir = {x:0, y:-20};
+            if(e.key === "ArrowDown" && snakeDir.y === 0) snakeDir = {x:0, y:20};
+            if(e.key === "ArrowLeft" && snakeDir.x === 0) snakeDir = {x:-20, y:0};
+            if(e.key === "ArrowRight" && snakeDir.x === 0) snakeDir = {x:20, y:0};
         }
     });
-
-    // Yılan Oyunu (Eski kod korundu)
-    function startSnake() {
-        canvas.width = 400; canvas.height = 400;
-        let s = [{x:200, y:200}], d = {x:20, y:0}, f = {x:100, y:100};
-        gameLoop = setInterval(() => {
-            ctx.fillStyle = "#000"; ctx.fillRect(0,0,400,400);
-            let head = {x: s[0].x+d.x, y: s[0].y+d.y};
-            s.unshift(head);
-            if(head.x === f.x && head.y === f.y) { score+=10; f={x:Math.floor(Math.random()*19)*20, y:Math.floor(Math.random()*19)*20}; updateUI(); }
-            else s.pop();
-            ctx.fillStyle = "var(--baby-blue)"; s.forEach(p => ctx.fillRect(p.x, p.y, 18, 18));
-            ctx.fillStyle = "var(--baby-pink)"; ctx.fillRect(f.x, f.y, 18, 18);
-        }, 150);
-    }
 </script>
 </body>
 </html>
