@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v3.1.0</title>
+    <title>Naz Duru | Portfolyo v3.2.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -33,8 +33,8 @@
             position: sticky; top: 0; z-index: 1000;
         }
 
-        nav ul { list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; }
-        nav a { color: white; text-decoration: none; font-weight: 600; cursor: pointer; padding: 8px 12px; border-radius: 20px; transition: 0.3s; }
+        nav ul { list-style: none; display: flex; gap: 15px; margin: 0; padding: 0; flex-wrap: wrap; }
+        nav a { color: white; text-decoration: none; font-weight: 600; cursor: pointer; padding: 8px 12px; border-radius: 20px; transition: 0.3s; white-space: nowrap; }
         nav a:hover { background: rgba(255,255,255,0.3); }
 
         .container { max-width: 1000px; margin: 30px auto; padding: 25px; background: var(--glass-bg); border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
@@ -43,6 +43,7 @@
         section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+        /* Home Cards */
         .home-card {
             cursor: pointer; background: #fff; padding: 25px; border-radius: 25px; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.4s ease;
@@ -56,6 +57,7 @@
             display: flex; align-items: center; justify-content: center; font-size: 30px;
         }
 
+        /* Diary Styles */
         .diary-input {
             background: #f8f9fa; padding: 20px; border-radius: 20px; margin-bottom: 30px;
             border: 2px dashed var(--baby-blue); text-align: center;
@@ -84,6 +86,7 @@
         .entry-date { color: #999; font-size: 0.85rem; }
         .entry-content { background: white; padding: 15px; border-radius: 15px; margin-top: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.03); border: 1px solid #eee; }
 
+        /* Movie Styles */
         .movie-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
         .movie-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #eee; transition: 0.3s; display: flex; flex-direction: column; }
         .movie-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
@@ -92,6 +95,26 @@
         .movie-info h4 { margin: 0 0 8px 0; color: #333; font-size: 1.1rem; }
         .movie-info p { margin: 0; color: #666; font-size: 0.8rem; line-height: 1.4; }
 
+        /* Lecture Notes Styles */
+        .notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .note-card {
+            background: white; border-radius: 20px; padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03); border-top: 5px solid #ddd;
+            transition: 0.3s;
+        }
+        .note-card:hover { transform: translateY(-5px); }
+        .note-card h3 { margin-top: 0; color: #444; display: flex; align-items: center; gap: 10px; }
+        .note-card ul { padding-left: 20px; color: #666; font-size: 0.9rem; line-height: 1.8; }
+        .note-card li { margin-bottom: 5px; }
+        
+        /* Subject specific colors */
+        .nc-math { border-color: #74b9ff; }
+        .nc-lit { border-color: #fab1a0; }
+        .nc-phys { border-color: #a29bfe; }
+        .nc-chem { border-color: #ffeaa7; }
+        .nc-bio { border-color: #55efc4; }
+
+        /* Game Styles */
         #game-area { background: #2d3436; padding: 20px; border-radius: 25px; display: none; text-align: center; margin-top: 20px; position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,0.5); }
         .tetris-wrapper { display: flex; justify-content: center; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
         .side-panel { background: #3d4446; padding: 15px; border-radius: 15px; color: white; min-width: 100px; border: 2px solid #555; }
@@ -106,12 +129,13 @@
     <nav>
         <ul>
             <li><a onclick="showSection('home')">🏠 Ana Sayfa</a></li>
+            <li><a onclick="showSection('notes')">📚 Ders Notları</a></li>
             <li><a onclick="showSection('diary')">📝 Günlük</a></li>
             <li><a onclick="showSection('games')">🎮 Oyunlar</a></li>
             <li><a onclick="showSection('movies')">🎬 Filmler</a></li>
         </ul>
     </nav>
-    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v3.1.0</span>
+    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v3.2.0</span>
 </header>
 
 <div class="container">
@@ -119,7 +143,7 @@
         <div style="text-align: center; padding: 20px 0;">
             <div style="background: white; padding: 40px 20px; border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 40px;">
                 <h1 style="font-size: 3rem; margin: 0; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Naz Duru'nun Dünyası 🌸</h1>
-                <p style="font-size: 1.2rem; color: #666; margin-top: 10px;">Yazılım, Oyun ve Sinema: Her şey burada!</p>
+                <p style="font-size: 1.2rem; color: #666; margin-top: 10px;">Yazılım, Oyun, Sinema ve Şimdi Dersler!</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
@@ -129,10 +153,10 @@
                     <p>Neon Yılan, Pro Tetris veya yenilenmiş Pacman motoruyla hemen oynamaya başla!</p>
                 </div>
 
-                <div class="home-card" onclick="showSection('diary')">
-                    <div class="icon-circle" style="background: #fce4ec; color: #f06292;">📝</div>
-                    <h3>Geliştirici Günlüğü</h3>
-                    <p>Projenin v1.0'dan bugüne nasıl geldiğini gör ve kendi notlarını ekle.</p>
+                <div class="home-card" onclick="showSection('notes')">
+                    <div class="icon-circle" style="background: #e8f8f5; color: #2ecc71;">📚</div>
+                    <h3>Ders Notları</h3>
+                    <p>10. Sınıf Matematik, Fizik, Kimya ve Biyoloji notlarına hızlıca göz at.</p>
                 </div>
 
                 <div class="home-card" onclick="showSection('movies')">
@@ -148,6 +172,68 @@
         </div>
     </section>
 
+    <section id="notes">
+        <h2 style="text-align: center; color: var(--baby-blue);">📚 10. Sınıf Ders Notları</h2>
+        <p style="text-align:center; color:#777; margin-bottom:30px;">Sınavlara hazırlık için kısa hatırlatmalar.</p>
+        
+        <div class="notes-grid">
+            <div class="note-card nc-math">
+                <h3>📐 Matematik</h3>
+                <ul>
+                    <li><strong>Sayma ve Olasılık:</strong> Permütasyon, Kombinasyon, Binom Açılımı.</li>
+                    <li><strong>Fonksiyonlar:</strong> Tanım kümesi, Görüntü kümesi, Bileşke fonksiyon.</li>
+                    <li><strong>Polinomlar:</strong> Polinomlarda bölme işlemi ve çarpanlara ayırma.</li>
+                    <li><strong>2. Dereceden Denklemler:</strong> Delta (Diskriminant) yöntemi, kökler toplamı ve çarpımı.</li>
+                    <li><strong>Dörtgenler ve Çokgenler:</strong> Yamuk, Paralelkenar, Eşkenar Dörtgen özellikleri.</li>
+                </ul>
+            </div>
+
+            <div class="note-card nc-lit">
+                <h3>✒️ Türk Dili ve Edebiyatı</h3>
+                <ul>
+                    <li><strong>Giriş:</strong> Edebiyatın Tarih ve Din ile ilişkisi.</li>
+                    <li><strong>Hikaye:</strong> Dede Korkut Hikayeleri (Geçiş dönemi), Halk Hikayeleri.</li>
+                    <li><strong>Şiir:</strong> İslamiyet öncesi (Koşuk, Sagu), Halk Şiiri (Koşma, Semai).</li>
+                    <li><strong>Destan/Efsane:</strong> Doğal ve Yapay destanlar, Dünya edebiyatından örnekler.</li>
+                    <li><strong>Roman:</strong> Tanzimat dönemi ilkleri, Servet-i Fünun romanı.</li>
+                </ul>
+            </div>
+
+            <div class="note-card nc-phys">
+                <h3>⚡ Fizik</h3>
+                <ul>
+                    <li><strong>Elektrik ve Manyetizma:</strong> Ohm Kanunu (V=I.R), Seri ve Paralel bağlama.</li>
+                    <li><strong>Basınç:</strong> Katı, sıvı ve gaz basıncı. Pascal prensibi.</li>
+                    <li><strong>Kaldırma Kuvveti:</strong> Arşimet prensibi, yüzen ve batan cisimler.</li>
+                    <li><strong>Dalgalar:</strong> Yay, su, ses ve deprem dalgaları. Dalga boyu ve frekans.</li>
+                    <li><strong>Optik:</strong> Aydınlanma, Gölge olayları, Düzlem ve Küresel aynalar.</li>
+                </ul>
+            </div>
+
+            <div class="note-card nc-chem">
+                <h3>🧪 Kimya</h3>
+                <ul>
+                    <li><strong>Temel Kanunlar:</strong> Kütlenin Korunumu, Sabit Oranlar, Katlı Oranlar.</li>
+                    <li><strong>Mol Kavramı:</strong> Avogadro sayısı, Mol kütlesi hesaplamaları.</li>
+                    <li><strong>Kimyasal Tepkimeler:</strong> Yanma, Sentez, Analiz ve Asit-Baz tepkimeleri.</li>
+                    <li><strong>Karışımlar:</strong> Homojen ve Heterojen karışımlar, Ayırma yöntemleri.</li>
+                    <li><strong>Asitler, Bazlar ve Tuzlar:</strong> pH kavramı, indikatörler.</li>
+                </ul>
+            </div>
+
+            <div class="note-card nc-bio">
+                <h3>🧬 Biyoloji</h3>
+                <ul>
+                    <li><strong>Hücre Bölünmeleri:</strong> Mitoz ve Eşeysiz Üreme çeşitleri.</li>
+                    <li><strong>Mayoz Bölünme:</strong> Eşeyli üreme, Parça değişimi (Crossing Over).</li>
+                    <li><strong>Kalıtım:</strong> Mendel ilkeleri, Eş baskınlık, Kan grupları.</li>
+                    <li><strong>Ekosistem Ekolojisi:</strong> Besin zinciri, Enerji piramidi.</li>
+                    <li><strong>Çevre Sorunları:</strong> Karbon ayak izi, Küresel ısınma.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <section id="diary">
         <h2 style="text-align: center; color: var(--baby-pink);">📝 Geliştirici Günlüğü</h2>
         <div class="diary-input">
@@ -157,20 +243,16 @@
 
         <div class="timeline" id="timelineArea">
             <div class="timeline-item">
-                <div><span class="version-tag">v3.1.0</span><span class="entry-date">Bugün</span></div>
+                <div><span class="version-tag">v3.2.0</span><span class="entry-date">Bugün</span></div>
+                <div class="entry-content"><strong>Ders Notları Eklendi 📚</strong><p>10. Sınıf sayısal ve sözel ders notları için yeni bir bölüm oluşturuldu.</p></div>
+            </div>
+            <div class="timeline-item">
+                <div><span class="version-tag">v3.1.0</span><span class="entry-date">Geçen Hafta</span></div>
                 <div class="entry-content"><strong>Pacman Motoru Güncellendi 🍕</strong><p>Pacman artık duvarlardan geçmiyor ve daha akıcı bir oynanış sunuyor.</p></div>
             </div>
             <div class="timeline-item">
-                <div><span class="version-tag">v3.0.0</span><span class="entry-date">Bugün</span></div>
+                <div><span class="version-tag">v3.0.0</span><span class="entry-date">Geçen Ay</span></div>
                 <div class="entry-content"><strong>Tam Arşiv & Dashboard 🌈</strong><p>Ana sayfa interaktif kartlarla yenilendi. Pacman motoru ve film arşivi stabilize edildi.</p></div>
-            </div>
-            <div class="timeline-item">
-                <div><span class="version-tag">v2.9.0</span><span class="entry-date">Dün</span></div>
-                <div class="entry-content"><strong>Akıllı Günlük Sistemi 📔</strong><p>Artık anılarını kaydedebilirsin! Yazdıkların tarayıcı hafızasında saklanır.</p></div>
-            </div>
-            <div class="timeline-item">
-                <div><span class="version-tag">v1.0.0</span><span class="entry-date">Başlangıç</span></div>
-                <div class="entry-content"><strong>Merhaba Dünya! 🌍</strong><p>Naz Duru'nun kişisel web sitesi yayına alındı.</p></div>
             </div>
         </div>
     </section>
