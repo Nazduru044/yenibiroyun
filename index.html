@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naz Duru | Portfolyo v3.2.0</title>
+    <title>Naz Duru | Portfolyo v3.2.1</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -135,7 +135,7 @@
             <li><a onclick="showSection('movies')">🎬 Filmler</a></li>
         </ul>
     </nav>
-    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v3.2.0</span>
+    <span style="background:white; color:var(--baby-blue); padding:5px 12px; border-radius:15px; font-size:12px; font-weight:bold;">v3.2.1</span>
 </header>
 
 <div class="container">
@@ -150,7 +150,7 @@
                 <div class="home-card" onclick="showSection('games')">
                     <div class="icon-circle" style="background: #e1f5fe; color: #03a9f4;">🎮</div>
                     <h3>Oyun Odası</h3>
-                    <p>Neon Yılan, Pro Tetris veya yenilenmiş Pacman motoruyla hemen oynamaya başla!</p>
+                    <p>Neon Yılan, Pro Tetris veya <strong>Zeki Hayaletli Pacman</strong> ile oynamaya başla!</p>
                 </div>
 
                 <div class="home-card" onclick="showSection('notes')">
@@ -242,6 +242,10 @@
         </div>
 
         <div class="timeline" id="timelineArea">
+            <div class="timeline-item">
+                <div><span class="version-tag">v3.2.1</span><span class="entry-date">Bugün</span></div>
+                <div class="entry-content"><strong>Pacman Yapay Zekası 🧠</strong><p>Hayalet artık rastgele dolaşmıyor, beni takip ediyor! Harita zorlaştırıldı ve hareketler yumuşatıldı.</p></div>
+            </div>
             <div class="timeline-item">
                 <div><span class="version-tag">v3.2.0</span><span class="entry-date">Bugün</span></div>
                 <div class="entry-content"><strong>Ders Notları Eklendi 📚</strong><p>10. Sınıf sayısal ve sözel ders notları için yeni bir bölüm oluşturuldu.</p></div>
@@ -364,7 +368,7 @@
 
         if(type === 'snake') { title.innerText = "🐍 Neon Yılan"; desc.innerText = "Ok tuşları ile yön ver!"; }
         else if(type === 'tetris') { title.innerText = "🧱 Tetris"; desc.innerText = "Blokları yerleştir!"; }
-        else { title.innerText = "🍕 Pacman"; desc.innerText = "Hayaletten kaç, noktaları topla! Ok tuşları ile yönünü belirle."; }
+        else { title.innerText = "🍕 Pacman"; desc.innerText = "YENİLENMİŞ MOTOR! Hayalet artık seni bulabilir. Duvarlardan kaç, noktaları topla."; }
     }
 
     function startGameNow() {
@@ -430,34 +434,48 @@
     function renderTetris() { ctx.fillStyle = "black"; ctx.fillRect(0,0,canvas.width,canvas.height); board.forEach((r, ri) => r.forEach((c, ci) => { if(c) { ctx.fillStyle = c; ctx.fillRect(ci*SIZE, ri*SIZE, SIZE-1, SIZE-1); } })); currentPiece.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { ctx.fillStyle = currentPiece.color; ctx.fillRect((currentPiece.x+dx)*SIZE, (currentPiece.y+dy)*SIZE, SIZE-1, SIZE-1); } })); }
     function drawSide(id, p) { const c = document.getElementById(id).getContext('2d'); c.fillStyle = "#3d4446"; c.fillRect(0,0,80,80); p.shape.forEach((r, dy) => r.forEach((v, dx) => { if(v) { c.fillStyle = p.color; c.fillRect(dx*15+20, dy*15+20, 14, 14); } })); }
 
-    // --- GELİŞMİŞ PACMAN MOTORU v3.1 ---
+    // --- GELİŞMİŞ PACMAN MOTORU v4.0 (Zeki Hayalet & Yeni Harita) ---
     function startPacman() {
         canvas.width = 400; canvas.height = 400;
-        const ts = 20; 
-        let p = { x: 1, y: 1, lastDir: {x:0, y:0} }; 
-        let ghost = { x: 18, y: 18 };
-        let pPix = { x: 20, y: 20 }, gPix = { x: 360, y: 360 };
+        const ts = 20; // Tile Size (Kare boyutu)
         
+        // Hız Ayarları (Değer ne kadar büyükse karakter o kadar YAVAŞlar)
+        // Player 12 frame'de bir, Hayalet 16 frame'de bir kare ilerler.
+        // Hayalet daha zeki olduğu için oyuncudan bir tık yavaş olması adildir.
+        const PLAYER_MOVE_RATE = 12; 
+        const GHOST_MOVE_RATE = 16;  
+        
+        let frameCount = 0;
+
+        let p = { x: 1, y: 1, dir: {x:0, y:0}, nextDir: {x:0, y:0} }; 
+        let ghost = { x: 18, y: 18 };
+        
+        // Görsel (Pixel) pozisyonları (Akıcı geçiş için)
+        let pPix = { x: 20, y: 20 };
+        let gPix = { x: 360, y: 360 };
+        
+        // 1: Duvar, 0: Yol
+        // Daha karmaşık ve kaçış noktaları olan yeni harita
         const map = [
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            [1,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1],
-            [1,0,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,0,1],
+            [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
+            [1,0,1,1,1,0,1,0,1,1,1,1,0,1,0,1,1,1,0,1],
+            [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+            [1,0,1,0,1,1,0,1,1,0,0,1,1,0,1,1,0,1,0,1],
+            [1,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1],
+            [1,1,1,0,1,1,1,0,1,0,0,1,0,1,1,1,0,1,1,1],
+            [1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+            [1,0,1,1,1,0,1,0,1,1,1,1,0,1,0,1,1,1,0,1],
+            [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
+            [1,0,1,1,1,1,1,0,1,1,1,1,0,1,1,1,1,1,0,1],
             [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-            [1,0,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,0,1],
-            [1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1],
-            [1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,0,1,1,1,1],
-            [1,1,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,1,1,1],
-            [1,0,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,1],
-            [1,0,1,1,1,1,0,1,0,0,0,0,1,0,1,1,1,1,0,1],
-            [1,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1],
-            [1,1,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,1,1],
-            [1,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
-            [1,0,1,1,0,1,0,1,1,1,1,1,1,0,1,0,1,1,0,1],
-            [1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,1],
-            [1,1,0,1,0,1,1,1,0,1,1,0,1,1,1,0,1,0,1,1],
-            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-            [1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,1,1,0,1],
-            [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+            [1,1,0,1,1,0,1,1,1,0,0,1,1,1,0,1,1,0,1,1],
+            [1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+            [1,0,1,0,1,0,1,1,0,1,1,0,1,1,0,1,0,1,0,1],
+            [1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+            [1,0,1,1,1,0,1,0,1,1,1,1,0,1,0,1,1,1,0,1],
+            [1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1],
+            [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
         ];
 
@@ -466,37 +484,79 @@
             for(let c=0; c<20; c++) 
                 if(map[r][c] === 0) dots.push({r, c});
 
+        // --- YOL BULMA ALGORİTMASI (BFS) ---
+        // Hayaletin duvarlara takılmadan sana gelen en kısa yolu bulmasını sağlar.
+        function findPath(start, target) {
+            let queue = [{ pos: start, path: [] }];
+            let visited = new Set();
+            visited.add(start.x + "," + start.y);
+
+            while(queue.length > 0) {
+                let current = queue.shift();
+                let {x, y} = current.pos;
+
+                // Hedefe ulaştıysak, ilk adımı döndür
+                if(x === target.x && y === target.y) {
+                    return current.path[0] || start; // Eğer zaten oradaysa dur
+                }
+
+                // Komşuları kontrol et (Sağ, Sol, Aşağı, Yukarı)
+                const neighbors = [
+                    {x: x+1, y: y}, {x: x-1, y: y},
+                    {x: x, y: y+1}, {x: x, y: y-1}
+                ];
+
+                for(let n of neighbors) {
+                    if(n.x >= 0 && n.x < 20 && n.y >= 0 && n.y < 20 && 
+                       map[n.y][n.x] === 0 && !visited.has(n.x + "," + n.y)) {
+                        visited.add(n.x + "," + n.y);
+                        let newPath = [...current.path, n]; // Yolu kaydet
+                        queue.push({ pos: n, path: newPath });
+                    }
+                }
+            }
+            return start; // Yol bulunamazsa dur
+        }
+        
         gameLoop = setInterval(() => {
-            let nextX = p.x + nextDir.x;
-            let nextY = p.y + nextDir.y;
+            frameCount++;
 
-            if (map[nextY] && map[nextY][nextX] === 0) {
-                p.x = nextX; p.y = nextY;
-                p.lastDir = {...nextDir};
-            } else {
-                let contX = p.x + p.lastDir.x;
-                let contY = p.y + p.lastDir.y;
-                if (map[contY] && map[contY][contX] === 0) {
-                    p.x = contX; p.y = contY;
+            // --- OYUNCU HAREKETİ ---
+            if (frameCount % PLAYER_MOVE_RATE === 0) {
+                // Önce istenen yöne gitmeyi dene
+                if (nextDir.x !== 0 || nextDir.y !== 0) {
+                    if (map[p.y + nextDir.y] && map[p.y + nextDir.y][p.x + nextDir.x] === 0) {
+                        p.dir = {...nextDir};
+                    }
+                }
+                
+                // Mevcut yönde ilerle
+                let nextX = p.x + p.dir.x;
+                let nextY = p.y + p.dir.y;
+
+                if (map[nextY] && map[nextY][nextX] === 0) {
+                    p.x = nextX;
+                    p.y = nextY;
                 }
             }
 
-            pPix.x += (p.x * ts - pPix.x) * 0.4;
-            pPix.y += (p.y * ts - pPix.y) * 0.4;
-
-            if(Math.random() > 0.3) {
-                let dx = p.x - ghost.x;
-                let dy = p.y - ghost.y;
-                let moveX = 0, moveY = 0;
-                if(Math.abs(dx) > Math.abs(dy)) moveX = dx > 0 ? 1 : -1;
-                else moveY = dy > 0 ? 1 : -1;
-                if(map[ghost.y + moveY] && map[ghost.y + moveY][ghost.x + moveX] === 0) {
-                    ghost.x += moveX; ghost.y += moveY;
-                }
+            // --- HAYALET YAPAY ZEKASI (Zeki Takip) ---
+            if (frameCount % GHOST_MOVE_RATE === 0) {
+                // Oyuncunun olduğu kareye giden ilk adımı bul
+                let nextStep = findPath(ghost, p);
+                ghost.x = nextStep.x;
+                ghost.y = nextStep.y;
             }
-            gPix.x += (ghost.x * ts - gPix.x) * 0.2;
-            gPix.y += (ghost.y * ts - gPix.y) * 0.2;
 
+            // --- Akıcı Görsel Güncelleme (Interpolasyon) ---
+            // Kareler arası yumuşak geçiş sağlar
+            pPix.x += (p.x * ts - pPix.x) * 0.2;
+            pPix.y += (p.y * ts - pPix.y) * 0.2;
+            gPix.x += (ghost.x * ts - gPix.x) * 0.1; // Hayalet biraz daha süzülerek gelir
+            gPix.y += (ghost.y * ts - gPix.y) * 0.1;
+
+            // --- Yeme Kontrolü ---
+            // Nokta yeme (Grid bazlı kesin kontrol)
             dots = dots.filter(d => {
                 if(d.r === p.y && d.c === p.x) {
                     score += 10;
@@ -506,56 +566,83 @@
                 return true;
             });
 
-            if(Math.abs(pPix.x - gPix.x) < 15 && Math.abs(pPix.y - gPix.y) < 15) {
-                alert("EYVAH! Yakalandın. Skorun: " + score);
+            // --- Çarpışma Kontrolü ---
+            // Piksel bazlı yakınlık kontrolü
+            let dx = pPix.x - gPix.x;
+            let dy = pPix.y - gPix.y;
+            let distance = Math.sqrt(dx*dx + dy*dy);
+
+            if(distance < 15) { // Çok yaklaştıysa yakala
+                alert("YAKALANDIN! Hayalet çok zekiydi. Skor: " + score);
                 stopGame();
                 return;
             }
 
             if(dots.length === 0) {
-                alert("TEBRİKLER! Tüm noktaları topladın!");
+                alert("TEBRİKLER! Bu zorlu labirenti bitirdin!");
                 stopGame();
                 return;
             }
 
+            // --- Çizim ---
             ctx.fillStyle = "#0f0f1a";
             ctx.fillRect(0, 0, 400, 400);
 
+            // Harita Çizimi
             for(let r=0; r<20; r++) {
                 for(let c=0; c<20; c++) {
                     if(map[r][c] === 1) {
-                        ctx.fillStyle = "#34495e";
-                        ctx.fillRect(c*ts+2, r*ts+2, ts-4, ts-4);
+                        // Duvarlara neon efekti
+                        ctx.fillStyle = "#2c3e50";
+                        ctx.strokeStyle = "#3498db";
+                        ctx.lineWidth = 1;
+                        ctx.fillRect(c*ts, r*ts, ts, ts);
+                        ctx.strokeRect(c*ts, r*ts, ts, ts);
                     }
                 }
             }
 
+            // Yem Çizimi
             ctx.fillStyle = "#fab1a0";
             dots.forEach(d => {
                 ctx.beginPath();
-                ctx.arc(d.c * ts + 10, d.r * ts + 10, 2.5, 0, Math.PI * 2);
+                ctx.arc(d.c * ts + 10, d.r * ts + 10, 3, 0, Math.PI * 2);
                 ctx.fill();
             });
 
-            ctx.fillStyle = "#ff4d4d";
+            // Hayalet Çizimi (Kırmızı ve Korkutucu)
+            ctx.fillStyle = "#e74c3c";
             ctx.shadowBlur = 15; ctx.shadowColor = "red";
-            ctx.fillRect(gPix.x + 3, gPix.y + 3, 14, 14);
+            // Hayalet Gövdesi
+            ctx.beginPath();
+            ctx.arc(gPix.x + 10, gPix.y + 10, 8, Math.PI, 0); // Üst yuvarlak
+            ctx.lineTo(gPix.x + 18, gPix.y + 18);
+            ctx.lineTo(gPix.x + 2, gPix.y + 18);
+            ctx.fill();
+            // Hayalet Gözleri (Oyuncuya baksın)
+            ctx.fillStyle = "white"; ctx.shadowBlur = 0;
+            ctx.beginPath(); ctx.arc(gPix.x + 7, gPix.y + 9, 2.5, 0, Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.arc(gPix.x + 13, gPix.y + 9, 2.5, 0, Math.PI*2); ctx.fill();
             
+            // Oyuncu (Pacman) Çizimi
             ctx.fillStyle = "#f1c40f";
             ctx.shadowBlur = 15; ctx.shadowColor = "yellow";
             ctx.beginPath();
-            let mouthOpen = (Date.now() % 300 < 150) ? 0.2 : 0;
+            
+            // Ağız hareketi hesaplama
+            let mouthOpen = (Math.sin(frameCount * 0.5) + 1) * 0.15; // 0 ile 0.3 arası
             let rotation = 0;
-            if(p.lastDir.x === 1) rotation = 0;
-            else if(p.lastDir.x === -1) rotation = Math.PI;
-            else if(p.lastDir.y === 1) rotation = Math.PI/2;
-            else if(p.lastDir.y === -1) rotation = -Math.PI/2;
+            if(p.dir.x === 1) rotation = 0;
+            else if(p.dir.x === -1) rotation = Math.PI;
+            else if(p.dir.y === 1) rotation = Math.PI/2;
+            else if(p.dir.y === -1) rotation = -Math.PI/2;
 
             ctx.moveTo(pPix.x + 10, pPix.y + 10);
-            ctx.arc(pPix.x + 10, pPix.y + 10, 9, rotation + mouthOpen * Math.PI, rotation + (2 - mouthOpen) * Math.PI);
+            ctx.arc(pPix.x + 10, pPix.y + 10, 8, rotation + mouthOpen * Math.PI, rotation + (2 - mouthOpen) * Math.PI);
             ctx.fill();
             ctx.shadowBlur = 0;
-        }, 100);
+
+        }, 1000 / 60); // 60 FPS (Döngü çok hızlı döner ama hareketler yukarıdaki sayaçlarla sınırlanır)
     }
 
     window.addEventListener("keydown", e => {
